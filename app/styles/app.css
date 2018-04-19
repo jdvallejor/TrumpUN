@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: lightblue;
+  text-align: center;
+}
+
+header ul li {
+  display: inline-block;
+}
+
+.header-title {
+  text-align: right;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.header-icon {
+  font-size: 20px;
+}
+
+footer {
+  background-color: lightblue;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.bienvenida {
+  margin: 90px 90px 90px 90px;
+}
+
+.bienvenida-texto {
+  background-color: #ffffff;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.bienvenida-opciones {
+  background-color: lightblue;
+  color: #0D3349;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.bienvenida-opciones:hover {
+  color: white;
+  background-color: #0D3349;
+  text-decoration: none;
+}
+
+.bienvenida-opciones:visited {
+  text-decoration: none;
+}
+
+.bienvenida ul li {
+  display: inline-block;
+}
+
+.bienvenida ul {
+  text-align: center;
+}
