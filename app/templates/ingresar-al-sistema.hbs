@@ -3,13 +3,13 @@
     <p>Ingrese su información de usuario</p>
     <div class="login-input">
       <p>Correo</p>
-      <input type="text">
+      {{input type="text" value=correo}}
     </div>
     <div class="login-input">
       <p>Contraseña</p>
-      <input type="password">
+      {{input type="password" value=password}}
     </div>
-    <div class="login-submit">
+    <div {{action 'ingresar' correo password on="mouseUp"}} class="login-submit">
       Ingresar
     </div>
   </div>
