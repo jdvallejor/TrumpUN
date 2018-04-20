@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+/* //////////////////////////////////////////////////////////////////////*/
+/* General */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* //////////////////////////////////////////////////////////////////////*/
+/* Encabezado y pie de pagina */
 
 header {
   background-color: lightblue;
@@ -31,6 +37,11 @@ footer {
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
 }
+
+/* //////////////////////////////////////////////////////////////////////*/
+
+/* //////////////////////////////////////////////////////////////////////*/
+/* Vista bienvenida */
 
 .bienvenida {
   margin: 90px 90px 90px 90px;
@@ -68,3 +79,59 @@ footer {
 .bienvenida ul {
   text-align: center;
 }
+
+/* //////////////////////////////////////////////////////////////////////*/
+
+/* //////////////////////////////////////////////////////////////////////*/
+/* vista ingresar-al-sistema */
+
+.login {
+  margin: 90px 450px 90px 450px;
+}
+
+.login-marco {
+  text-align: left;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #0D3349;
+    padding: 30px 30px 30px 30px;
+  }
+
+.login p {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login-input {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.login-input p {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.login-submit {
+  margin-left: 100px;
+  margin-right: 100px;
+  text-align: center;
+  background-color: lightblue;
+  color: #0D3349;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+.login-submit:hover {
+  color: white;
+  background-color: #0D3349;
+  text-decoration: none;
+}
+
+/* //////////////////////////////////////////////////////////////////////*/
