@@ -1,0 +1,29 @@
+<div class="signUp">
+  <div class="signUp-marco">
+    <p>Ingrese su información de usuario</p>
+    <div class="signUp-input">
+      <p>Correo</p>
+      {{input type="text" value=correo}}
+    </div>
+    <div class="signUp-input">
+      <p>Contraseña</p>
+      {{input type="password" value=password}}
+    </div>
+    <div class="signUp-input">
+      <p>Nombre</p>
+      {{input type="text" value=nombre}}
+    </div>
+    <div class="signUp-input">
+      <p>Documento</p>
+      {{input type="text" value=documento}}
+    </div>
+    <div class="signUp-input">
+      <p>Celular</p>
+      {{input type="text" value=celular}}
+    </div>
+    <div {{action 'registrar' on="mouseUp"}} class="signUp-submit">
+      Registrar
+    </div>
+  </div>
+</div>
+{{outlet}}

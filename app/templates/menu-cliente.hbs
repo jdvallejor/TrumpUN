@@ -1,0 +1,7 @@
+<h1>Menú cliente</h1>
+{{#if session.isAuthenticated}}
+  {{#each model as |u|}}
+    <p>Logged as: {{u.nombre}}</p>
+  {{/each}}
+{{/if}}
+{{outlet}}

@@ -10,6 +10,13 @@
         {{material-icon "home"}}
       </div>
     </li>
+    <li>
+      {{#if session.isAuthenticated}}
+        <div {{action 'salir' on="mouseUp"}} class="login-submit">
+          Salir
+        </div>
+      {{/if}}
+    </li>
   </ul>
 
 </header>

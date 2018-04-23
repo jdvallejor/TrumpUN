@@ -1,3 +1,6 @@
+
+@import "ember-bootstrap/bootstrap";
+
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /* //////////////////////////////////////////////////////////////////////*/
@@ -94,8 +97,8 @@ footer {
   border-width: 2px;
   border-radius: 10px;
   border-color: #0D3349;
-    padding: 30px 30px 30px 30px;
-  }
+  padding: 30px 30px 30px 30px;
+}
 
 .login p {
   text-align: center;
