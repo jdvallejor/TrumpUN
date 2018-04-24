@@ -11,8 +11,20 @@
   </div>
 
   {{#if session.isAuthenticated}}
-    <div {{action 'salir' on="mouseUp"}} class="login-submit">
-      Salir
+    <div class="header-log-info">
+      <div>
+        <img src="/img/{{rol}}.png" alt="{{rol}}" class="header-icon">
+      </div>
+      <div>
+        {{usuario.nombre}}<br>
+        <small class="pt-0 pb-0">{{rol}}</small>
+      </div>
+      <div>
+        <button {{action 'salir' on="mouseUp"}} class="btn btn-danger">
+          Salir
+        </button>
+      </div>
+
     </div>
   {{/if}}
 </header>

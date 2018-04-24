@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 
 export default Controller.extend({
   firebaseApp: service(),
@@ -8,7 +8,7 @@ export default Controller.extend({
     ingresar: function () {
       let controller = this
       // Chequeo de campos vacios
-      if (this.get('correo') === "" || this.get('password') === ""){
+      if (this.get('correo') === "" || this.get('password') === "") {
         alert("Faltan datos por ingresar")
       } else {
         // Consulta de usuario existente
@@ -18,10 +18,10 @@ export default Controller.extend({
           password: this.get('password')
         }).then(function (data) {
 
-          let uid = data.uid
+          let uid = data.uid;
 
           controller.get('firebaseApp').database().ref('usuarios').child(uid).once('value').then(function (snapshot) {
-            controller.get('usuarioActual').agregar(snapshot.val())
+            controller.get('usuarioActual').agregar(snapshot.val());
             if (snapshot.val().rol === 0) {
               controller.get('target').replaceWith('menu-cliente')
             } else if (snapshot.val().rol === 1) {
@@ -33,7 +33,7 @@ export default Controller.extend({
           })
 
           // Realizar consulta para el rol
-        }).catch(function (error){
+        }).catch(function (error) {
           alert(error)
         })
       }

@@ -4,6 +4,9 @@ import {inject as service} from '@ember/service';
 export default Route.extend({
   session: service(),
   usuarioActual: service('usuario-actual'),
+  model() {
+    return this.get('usuarioActual').usuario;
+  },
   beforeModel:
     function () {
       return this.get('session').fetch().catch(function () {
@@ -14,7 +17,7 @@ export default Route.extend({
     salir: function () {
       this.get('session').close();
       this.replaceWith('bienvenida');
-      this.get('usuarioActual').usuario = []
+      this.get('usuarioActual').usuario = null;
     }
   }
 })

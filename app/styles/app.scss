@@ -73,8 +73,31 @@ header ul li {
   max-height: 20%;
 }
 
+.header-log-info {
+  display: table;
+  border-radius: 20px;
+  width: 350px;
+  max-width: 35%;
+  justify-content: center;
+  color: #FFFFFF;
+  height: 70px;
+  max-height: 70px;
+  background-color: $main-dark-shadow;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+}
+
+.header-log-info > div {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .header-icon {
-  font-size: 20px;
+  height: 60px;
+  width: auto;
 }
 
 .pt-trumpun2 {
