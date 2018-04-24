@@ -1,30 +1,31 @@
 <header>
-  <ul>
-    <li>
-      <div class="header-title">
-        <h1>TrumpUN</h1>
-      </div>
-    </li>
-    <li>
-      <div class="header-icon">
-        {{material-icon "home"}}
-      </div>
-    </li>
-    <li>
-      {{#if session.isAuthenticated}}
-        <div {{action 'salir' on="mouseUp"}} class="login-submit">
-          Salir
-        </div>
-      {{/if}}
-    </li>
-  </ul>
+  <div id="logo1" class="header-title hide-logo">
+    {{#link-to "bienvenida" }}
+      <img class="logo-size logo-shadow" src="/logo.png" alt="TrumpUN">
+    {{/link-to}}
+  </div>
+  <div id="logo2" class="header-title">
+    {{#link-to "bienvenida" }}
+      <img class="banner-size logo-shadow" src="/banner.png" alt="TrumpUN">
+    {{/link-to}}
+  </div>
 
+  {{#if session.isAuthenticated}}
+    <div {{action 'salir' on="mouseUp"}} class="login-submit">
+      Salir
+    </div>
+  {{/if}}
 </header>
 
-<div>
+<div class="main-body pt-trumpun">
   {{outlet}}
 </div>
 
 <footer>
-  2018 Grupo 11 DCPS
+  <div class="row">
+    <div class="footer-mov-text">DCPS</div>
+    <div class="footer-desk-text">Diseño y Construcción de Productos de Software</div>
+    <div>Grupo 11 - TrumpUN</div>
+    <div>2018</div>
+  </div>
 </footer>

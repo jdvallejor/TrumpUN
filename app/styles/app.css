@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
 
 /* //////////////////////////////////////////////////////////////////////*/
 /* General */
@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Tangerine', serif;
 }
 
 /* //////////////////////////////////////////////////////////////////////*/
@@ -23,7 +24,7 @@ header ul li {
 
 .header-title {
   text-align: right;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Tangerine', serif;
   font-size: 20px;
 }
 
@@ -34,8 +35,14 @@ header ul li {
 footer {
   background-color: lightblue;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
   font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  vertical-align: middle;
+  height: 15%;
+  max-height: 20%;
+
 }
 
 /* //////////////////////////////////////////////////////////////////////*/
@@ -94,8 +101,8 @@ footer {
   border-width: 2px;
   border-radius: 10px;
   border-color: #0D3349;
-    padding: 30px 30px 30px 30px;
-  }
+  padding: 30px 30px 30px 30px;
+}
 
 .login p {
   text-align: center;

@@ -1,16 +1,14 @@
-<div class="bienvenida">
+<div class="bienvenida text-center">
   <p class="bienvenida-texto">Bienvenido a la inmobiliaria TrumpUN</p>
-  <ul>
-    <li>
-      {{#link-to "ingresar-al-sistema" class="bienvenida-opciones"}}
-        Ingresar
-      {{/link-to}}
-    </li>
-    <li>
-      {{#link-to "crear-cuenta" class="bienvenida-opciones"}}
-        Crear una nueva cuenta
-      {{/link-to}}
-    </li>
-  </ul>
+  <div class="p-1">
+    {{#link-to "ingresar-al-sistema" tagName= "button" class="btn btn-primary main-btn-size"}}
+      Ingresar
+    {{/link-to}}
+  </div>
+  <div class="p-1">
+    {{#link-to "crear-cuenta" tagName= "button" class="btn btn-primary main-btn-size"}}
+      Crear una nueva cuenta
+    {{/link-to}}
+  </div>
 </div>
 {{outlet}}

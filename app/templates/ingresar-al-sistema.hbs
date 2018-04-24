@@ -9,8 +9,10 @@
       <p>Contraseña</p>
       {{input type="password" value=password}}
     </div>
-    <div {{action 'ingresar' on="mouseUp"}} class="login-submit">
-      Ingresar
+    <div class="text-right">
+      <button {{action 'ingresar' on="mouseUp"}} class="btn btn-primary">
+        Ingresar
+      </button>
     </div>
   </div>
 </div>
