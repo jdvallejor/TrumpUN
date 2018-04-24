@@ -1,10 +1,10 @@
 <header>
-  <div id="logo1" class="header-title hide-logo">
+  <div id="logo1" class="header-title {{unless isBienvenida 'hide-logo'}}">
     {{#link-to "bienvenida" }}
       <img class="logo-size logo-shadow" src="/logo.png" alt="TrumpUN">
     {{/link-to}}
   </div>
-  <div id="logo2" class="header-title">
+  <div id="logo2" class="header-title {{if isBienvenida 'hide-logo'}}">
     {{#link-to "bienvenida" }}
       <img class="banner-size logo-shadow" src="/banner.png" alt="TrumpUN">
     {{/link-to}}
@@ -17,7 +17,7 @@
   {{/if}}
 </header>
 
-<div class="main-body pt-trumpun">
+<div class="main-body {{if isBienvenida "pt-trumpun" "pt-trumpun2"}}">
   {{outlet}}
 </div>
 
