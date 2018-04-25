@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+    identificador: DS.attr('string'),
     direccion: DS.attr('date'),
     estrato: DS.attr('number'),
     area_total: DS.attr('number'),
@@ -11,7 +12,7 @@ export default DS.Model.extend({
     
     //cuarto: DS.hasMany('cuarto'),
     //bano: DS.hasMany('bano'),
-    arrendatario: DS.belongsTo('cliente', { inverse: 'inmueblesArrienda' }),
-    arrendador: DS.belongsTo('cliente', { inverse: 'inmueblesOfrece' }),
+    arrendatario: DS.belongsTo('cliente', { inverse: 'inmueblesArrienda' , key: 'documento'}),
+    arrendador: DS.belongsTo('cliente', { inverse: 'inmueblesOfrece' , key: 'documento'}),
     contratos: DS.hasMany('contrato'),
 });

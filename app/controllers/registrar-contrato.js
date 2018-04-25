@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { typeOf } from '@ember/utils';
 
 export default Controller.extend({
     
@@ -8,66 +7,41 @@ export default Controller.extend({
             const fecha = new Date().toLocaleString();
             
             /*let datos = {
-                valor: this.get('valor'),                
+                valor: this.get('valor'),
                 arrendador: this.get('arrendador'),
                 arrendatario: this.get('arrendatario'),
                 inmueble: this.get('inmueble'),
             }*/
 
-            if (this.get('valor') === undefined || this.get('valor') === ""){
-                alert("Debe asignar el valor de Valor alquiler");
-            } 
-
-            if (!(/(\d)+/.test(this.get('valor')))){
-                alert("Tipo de dato incorrecto para el campo Valor alquiler");
+            if (
+                this.get('valor')           === undefined || this.get('valor')          === "" ||
+                this.get('arrendador')      === undefined || this.get('arrendador')     === "" ||
+                this.get('arrendatario')    === undefined || this.get('arrendatario')   === "" ||
+                this.get('inmueble')        === undefined || this.get('inmueble')       === ""
+            ){
+                alert("Campos incompletos");
             }
-            
-
-            /*this.get('store').createRecord('cliente', {
-                nombre: 'foo',
-                documento: '12345',
-                celular: '112233',
-                contratos: [],
-                inmueblesArrienda: [],
-                inmueblesOfrece: [],
-            }).save();
-            this.get('store').createRecord('cliente', {
-                nombre: 'bar',
-                documento: '6789',
-                celular: '223344',
-                contratos: [],
-                inmueblesArrienda: [],
-                inmueblesOfrece: [],
-            }).save();
-            /*this.get('store').createRecord('cliente', {
-                nombre: 'foo',
-                documento: '12345',
-                celular: '112233',
-                contratos: [],
-                inmueblesArrienda: [],
-                inmueblesOfrece: [],
-            }).save();
-            this.get('store').createRecord('cliente', {
-                nombre: 'bar',
-                documento: '6789',
-                celular: '223344',
-                contratos: [],
-                inmueblesArrienda: [],
-                inmueblesOfrece: [],
-            }).save();
-            this.get('store').createRecord('inmueble', {
-                direccion: "",
-                estrato: "",
-                area_total: "",
-                nro_pisos: "",
-                nro_balcones: "",
-                nro_banos: "",
-                estado: "",                
-                contratos: []
-            }).save();
+            else if (!(/^\d+$/.test(this.get('valor')))){
+                alert("Tipo de dato incorrecto para el campo Valor alquiler");
+                this.set('valor', '');
+            }
+            else if (!(/^\d+$/.test(this.get('arrendador')))){
+                alert("Tipo de dato incorrecto para el campo ID del arrendador");
+                this.set('arrendador', '');
+            }
+            else if (!(/^\d+$/.test(this.get('arrendatario')))){
+                alert("Tipo de dato incorrecto para el campo ID del arrendatario");
+                this.set('arrendatario', '');
+            }
+            else if (!(/^[A-Za-z0-9]+$/.test(this.get('inmueble')))){
+                alert("Tipo de dato incorrecto para el campo ID del inmueble");
+                this.set('inmueble', '');
+            }
+            else{
 
 
-            */
+            }
+
 
         },
         cancelar(){
