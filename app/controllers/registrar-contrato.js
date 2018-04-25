@@ -86,7 +86,7 @@ export default Controller.extend({
                                         arrendatario.save();
                                         
                                         arrendador.set('contratos', [contrato]);
-                                        arrendatario.set('inmueblesOfrece', [inmueble]);
+                                        arrendador.set('inmueblesOfrece', [inmueble]);
                                         arrendador.save();
 
                                         alert('Contrato creado correctamente');
