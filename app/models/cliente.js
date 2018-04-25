@@ -6,4 +6,6 @@ export default DS.Model.extend({
   celular: DS.attr('number'),
 
   contratos: DS.hasMany('contrato'),
+  inmueblesArrienda: DS.hasMany('inmueble', { inverse: 'arrendatario' }),
+  inmueblesOfrece: DS.hasMany('inmueble', { inverse: 'arrendador' }),
 });

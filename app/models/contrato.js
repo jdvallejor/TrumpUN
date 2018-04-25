@@ -4,8 +4,8 @@ export default DS.Model.extend({
     fecha: DS.attr('date'),
     valor: DS.attr('number'),
     
-    arrendador: DS.belongsTo('cliente'),
-    arrendatario: DS.belongsTo('cliente'),
+    arrendador: DS.belongsTo('cliente', { inverse: null , key: 'documento'}),
+    arrendatario: DS.belongsTo('cliente', { inverse: null , key: 'documento'}),
     inmueble: DS.belongsTo('inmueble'),
     //funcionario: DS.belongsTo('cliente'),
 });

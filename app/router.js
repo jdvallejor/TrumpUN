@@ -6,7 +6,7 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {
+Router.map(function () {
   this.route('bienvenida');
   this.route('ingresar-al-sistema');
   this.route('crear-cuenta');
@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('menu-funcionario');
   this.route('menu-jefe');
   this.route('consultar-pago');
+  this.route('registrar-contrato');
 });
 
 export default Router;

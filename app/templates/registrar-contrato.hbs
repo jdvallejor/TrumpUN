@@ -1,0 +1,38 @@
+<div class="signUp">
+    <div class="signUp-marco">
+        
+      
+        <div class="signUp-input">
+        <p>ID del arrendatario</p>
+        {{input type="text" value=arrendatario}}
+        </div>
+        
+        <div class="signUp-input">
+        <p>ID del arrendador</p>
+        {{input type="text" value=arrendador}}
+        </div>
+        
+        <div class="signUp-input">
+        <p>ID del inmueble</p>
+        {{input type="text" value=inmueble}}
+        </div>
+        
+        <div class="signUp-input">
+        <p>Valor alquiler</p>
+        {{input type="text" value=valor}}
+        </div>
+
+        <div class="text-center">
+        <button {{action 'generarContrato' on="mouseUp"}} class="btn btn-primary">
+            Generar contrato
+        </button>
+        <button {{action 'cancelar' on="mouseUp"}} class="btn btn-primary">
+            Cancelar
+        </button>
+        </div>
+
+
+    </div>
+</div>
+
+{{outlet}}
