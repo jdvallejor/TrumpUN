@@ -1,1 +1,18 @@
+{{#if session.isAuthenticated}}
+  <div class="main-container">
+    <div class="login-marco col-md-4 text-center">
+      <p class="h2 font-weight-bold">Menú Funcionario</p>
+      <div class="p-1">
+        {{#link-to "bienvenida" tagName= "button" class="btn btn-primary main-btn-size"}}
+          Registrar Contrato
+        {{/link-to}}
+      </div>
+      <div class="p-1">
+        {{#link-to "consultar-pago" tagName= "button" class="btn btn-primary main-btn-size"}}
+          Consultar Pago y Comisión
+        {{/link-to}}
+      </div>
+    </div>
+  </div>
+{{/if}}
 {{outlet}}

@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('menu-cliente');
   this.route('menu-funcionario');
   this.route('menu-jefe');
+  this.route('consultar-pago');
 });
 
 export default Router;

@@ -37,10 +37,11 @@ header {
   box-shadow: 0 2px 10px 1px $main-dark-shadow;
   font-size: 20px;
   position: fixed;
-  top: 0px;
+  top: 0;
   width: 100%;
   vertical-align: middle;
   border-bottom: solid 1px $main-dark-border;
+  z-index: 99999999999;
 }
 
 header ul li {
@@ -101,11 +102,11 @@ header ul li {
 }
 
 .pt-trumpun2 {
-  padding-top: 4.5rem;
+  padding-top: 5.3rem;
 }
 
 .pt-trumpun {
-  padding-top: 7.5rem;
+  padding-top: 9rem;
 }
 
 .main-btn-size {
@@ -115,7 +116,14 @@ header ul li {
 }
 
 .main-body {
-  min-height: 100%;
+  min-height: 100vh;
+}
+
+.main-container {
+  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+  vertical-align: middle;
+  min-height: 77vh;
+  width: 100%;
 }
 
 footer {
@@ -132,7 +140,7 @@ footer {
 }
 
 footer > .row {
-  padding: 0.7em;
+  padding: 0.5em;
   justify-content: center !important;
 }
 
@@ -220,11 +228,10 @@ footer > .row > div:not(:last-child):after {
 }
 
 .login-marco {
-  border-style: solid;
-  border-width: 2px;
+  border: solid 2px $main-dark-shadow;
   border-radius: 10px;
-  border-color: #0D3349;
-  padding: 30px 30px 30px 30px;
+  padding: 10px;
+  margin: 0 auto;
 }
 
 .login p {
