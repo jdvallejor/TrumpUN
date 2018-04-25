@@ -17,7 +17,7 @@ export default Controller.extend({
           email: this.get('correo'),
           password: this.get('password')
         }).then(function (data) {
-
+          // Realizar consulta para el rol
           let uid = data.uid;
 
           controller.get('firebaseApp').database().ref('usuarios').child(uid).once('value').then(function (snapshot) {
@@ -32,9 +32,13 @@ export default Controller.extend({
 
           })
 
-          // Realizar consulta para el rol
+
         }).catch(function (error) {
-          alert(error)
+          if (error.code === 'auth/user-not-found'){
+            alert('Ese tal usuario no existe')
+          } else if (error.code === 'auth/wrong-password'){
+            alert('La contraseña es incorrecta')
+          }
         })
       }
     }
