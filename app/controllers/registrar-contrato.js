@@ -4,14 +4,7 @@ export default Controller.extend({
     
     actions:{
         generarContrato(){
-            const fecha = new Date().toLocaleString();
-            
-            /*let datos = {
-                valor: this.get('valor'),
-                arrendador: this.get('arrendador'),
-                arrendatario: this.get('arrendatario'),
-                inmueble: this.get('inmueble'),
-            }*/
+            const fechaContrato = new Date().toLocaleString();
 
             if (
                 this.get('valor')           === undefined || this.get('valor')          === "" ||
@@ -39,10 +32,81 @@ export default Controller.extend({
             }
             else{
 
+                this.store.query('cliente', {
+                    orderBy: 'documento', 
+                    equalTo: this.get('arrendador')
+                }).then((arrendadores) => {
+                    return arrendadores.get('firstObject');
+                }).then((arrendador) => {
+                    if(arrendador === undefined){
+                        alert('El ID del arrendador no existe');
+                    }
+                    else{
+                        
+                        this.store.query('cliente', { 
+                            orderBy: 'documento', 
+                            equalTo: this.get('arrendatario')
+                        }).then((arrendatarios) => {
+                            return arrendatarios.get('firstObject');
+                        }).then((arrendatario) => {
+                            if(arrendatario === undefined){
+                                alert('El ID del arrendatario no existe');
+                            }
+                            else{
+
+                                this.store.query('inmueble', { 
+                                    orderBy: 'identificador', 
+                                    equalTo: this.get('inmueble')
+                                }).then((inmuebles) => {
+                                    return inmuebles.get('firstObject');
+                                }).then((inmueble) => {
+                                    if(inmueble === undefined){
+                                        alert('El ID del inmueble no existe');
+                                    }
+                                    else if(inmueble.get('estado') === 'ocupado'){
+                                        alert('El inmueble no esta disponible');
+                                    }
+                                    else{
+
+                                        let contrato = this.get('store').createRecord('contrato', {
+                                            fecha: fechaContrato,
+                                            valor: this.get('valor'),
+                                            arrendador: arrendador,
+                                            arrendatario: arrendatario,
+                                            inmueble: inmueble,
+                                        });
+                                        contrato.save();
+
+                                        inmueble.set('estado', 'ocupado');
+                                        inmueble.set('contratos', [contrato]);
+                                        inmueble.save();
+
+                                        arrendatario.set('contratos', [contrato]);
+                                        arrendatario.set('inmueblesArrienda', [inmueble]);
+                                        arrendatario.save();
+                                        
+                                        arrendador.set('contratos', [contrato]);
+                                        arrendatario.set('inmueblesOfrece', [inmueble]);
+                                        arrendador.save();
+
+                                        alert('Contrato creado correctamente');
+                                    }
+
+                                });
+
+                            }
+                        });
+
+                    }
+                });
+
+                
+
+               
 
             }
 
-
+            
         },
         cancelar(){
             this.transitionToRoute('menu-funcionario');
