@@ -24,6 +24,25 @@ export default Service.extend({
       return rol;
     }
     return null;
+  },
+  getPage() {
+    let rol = 'null';
+    const user = this.get('usuario');
+    if (user != null) {
+      const rolN = user.rol;
+      if (rolN == 0) {
+        rol = 'menu-cliente';
+      } else if (rolN == 1) {
+        rol = 'menu-funcionario';
+      } else if (rolN == 2) {
+        rol = 'menu-jefe'
+      }
+      return rol;
+    }
+    return 'bienvenida';
+  },
+  reset() {
+    this.set('usuario', null);
   }
 
 });

@@ -17,7 +17,7 @@ export default Route.extend({
     salir: function () {
       this.get('session').close();
       this.replaceWith('bienvenida');
-      this.get('usuarioActual').usuario = null;
+      this.get('usuarioActual').reset();
     }
   }
 })

@@ -10,5 +10,8 @@ export default Controller.extend({
   }),
   rol: Ember.computed('usuarioActual.usuario.rol', function () {
     return this.get('usuarioActual').getRol();
-  })
+  }),
+  mainPage: Ember.computed('usuarioActual.usuario.page', function () {
+    return this.get('usuarioActual').getPage();
+  }),
 });
