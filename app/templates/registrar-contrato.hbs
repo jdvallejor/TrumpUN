@@ -1,38 +1,35 @@
-<div class="signUp">
-    <div class="signUp-marco">
-        
-      
-        <div class="signUp-input">
-        <p>ID del arrendatario</p>
-        {{input type="text" value=arrendatario}}
-        </div>
-        
-        <div class="signUp-input">
-        <p>ID del arrendador</p>
-        {{input type="text" value=arrendador}}
-        </div>
-        
-        <div class="signUp-input">
-        <p>ID del inmueble</p>
-        {{input type="text" value=inmueble}}
-        </div>
-        
-        <div class="signUp-input">
-        <p>Valor alquiler</p>
-        {{input type="text" value=valor}}
-        </div>
-
-        <div class="text-center">
-        <button {{action 'generarContrato' on="mouseUp"}} class="btn btn-primary">
-            Generar contrato
-        </button>
-        <button {{action 'cancelar' on="mouseUp"}} class="btn btn-primary">
-            Cancelar
-        </button>
-        </div>
-
-
+<div class="main-container">
+  <div class="col-md-6 login-marco">
+    <p class="h3 font-weight-bold">Registrar Contrato</p>
+    <div class="signUp-input">
+      <p>ID del arrendatario</p>
+      {{input type="text" value=arrendatario class="form-control col-sm-11 col-md-9"}}
     </div>
+
+    <div class="signUp-input">
+      <p>ID del arrendador</p>
+      {{input type="text" value=arrendador class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>ID del inmueble</p>
+      {{input type="text" value=inmueble class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Valor alquiler</p>
+      {{input type="text" value=valor class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="text-center">
+      <button {{action 'generarContrato' on="mouseUp"}} class="btn btn-primary">
+        Generar contrato
+      </button>
+      <button {{action 'cancelar' on="mouseUp"}} class="btn btn-primary">
+        Cancelar
+      </button>
+    </div>
+  </div>
 </div>
 
 {{outlet}}

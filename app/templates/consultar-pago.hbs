@@ -1,1 +1,67 @@
+{{#if session.isAuthenticated}}
+  <div class="main-container pb-5 mb-5">
+    <div class="col-md-6 login-marco">
+      <p class="h3 font-weight-bold">Consultar Pago y Comisión</p>
+
+      <div class="signUp-input">
+        <p>Mes: </p>
+        {{#power-select selected=selMes options=meses  onchange=(action "selectMes") as |name|}}
+          {{name}}
+        {{/power-select}}
+      </div>
+
+      <div class="signUp-input">
+        <p>Año: </p>
+        {{#power-select selected=selYear options=years  onchange=(action "selectYear") as |name|}}
+          {{name}}
+        {{/power-select}}
+      </div>
+
+      <div class="text-center">
+        <button {{action 'consultar' on="click"}} class="btn btn-primary">
+          Consultar
+        </button>
+        <button {{action 'cancelar' on="click"}} class="btn btn-primary">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    {{#if salarioBase}}
+      <br>
+      <div class="col-md-6 login-marco p-2">
+        <div class="p-2">
+          <span class="h5 font-weight-bold">Salario Base: </span><span class="h5">{{salarioBase}}</span>
+        </div>
+        <div class="p-2">
+          <span class="h5 font-weight-bold">Contratos: </span>
+        </div>
+        {{#if listaLength}}
+          {{#each listaContratos as |contrato|}}
+            <div class="login-marco col-md-9 m-2">
+              <span class="font-weight-bold">Arrendador : </span><span>{{contrato.arrendador.nombre}}</span>
+              <br>
+              <span class="font-weight-bold">Arrendatario : </span><span>{{contrato.arrendatario.nombre}}</span>
+              <br>
+              <span class="font-weight-bold">Inmueble : </span><span>{{contrato.inmueble.identificador}}</span>
+              <br>
+              <span class="font-weight-bold">Fecha : </span><span>{{contrato.fecha}}</span>
+              <br>
+              <span class="font-weight-bold">Valor : </span><span>{{contrato.valor}}</span>
+            </div>
+          {{/each}}
+        {{/if}}
+        {{#unless listaLength}}
+          <div class="border border-danger rounded col-md-9 m-2 text-danger">
+            No posee contratos creados en el mes seleccionado
+          </div>
+        {{/unless}}
+        <br>
+        <div class="p-2">
+          <span class="h5 font-weight-bold">Salario Total: </span><span class="h5">{{sumaTotal}}</span>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
 {{outlet}}
