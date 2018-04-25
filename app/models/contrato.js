@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-    fecha: DS.attr('date'),
+    fecha: DS.attr('string'),
     valor: DS.attr('number'),
     
     arrendador: DS.belongsTo('cliente', { inverse: null , key: 'documento'}),
