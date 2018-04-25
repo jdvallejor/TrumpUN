@@ -11,5 +11,7 @@ export default DS.Model.extend({
     
     //cuarto: DS.hasMany('cuarto'),
     //bano: DS.hasMany('bano'),
+    arrendatario: DS.belongsTo('cliente', { inverse: 'inmueblesArrienda' }),
+    arrendador: DS.belongsTo('cliente', { inverse: 'inmueblesOfrece' }),
     contratos: DS.hasMany('contrato'),
 });
