@@ -1,19 +1,56 @@
 <div class="main-container">
   <div class="col-md-6 login-marco">
     <p class="h3 font-weight-bold">Registrar Contrato</p>
-    <div class="signUp-input">
-      <p>ID del arrendatario</p>
-      {{input type="text" value=arrendatario class="form-control col-sm-11 col-md-9"}}
-    </div>
 
     <div class="signUp-input">
       <p>ID del arrendador</p>
-      {{input type="text" value=arrendador class="form-control col-sm-11 col-md-9"}}
+      {{#power-select
+        options=model.clientes
+        selected=arrendador
+        placeholder="Documento"
+        selectedItemComponent="select-item-cliente"
+        searchField="documento"
+        onchange=(action "actualizarArrendador")
+        as |arrendador_i|
+      }}
+        <div>
+          <strong>{{arrendador_i.nombre}}</strong>
+          <br>
+          <small>Documento: <i>{{arrendador_i.documento}}</i></small>
+        </div>
+      {{/power-select}}
     </div>
 
     <div class="signUp-input">
       <p>ID del inmueble</p>
-      {{input type="text" value=inmueble class="form-control col-sm-11 col-md-9"}}
+      {{#power-select
+        options=model.clientes
+        selected=arrendatario
+        placeholder="Documento"
+        selectedItemComponent="select-item-cliente"
+        searchField="documento"
+        onchange=(action "actualizarArrendatario")
+        as |arrendatario_i|
+      }}
+        <div>
+          <strong>{{arrendatario_i.nombre}}</strong>
+          <br>
+          <small>Documento: <i>{{arrendatario_i.documento}}</i></small>
+        </div>
+      {{/power-select}}
+    </div>
+
+    <div class="signUp-input">
+      <p>ID del inmueble</p>
+      {{#power-select 
+        selected=inmueble 
+        options=listaInmuebles
+        placeholder="Identificador"
+        noMatchesMessage="El inmueble no existe"
+        onchange=(action "buscarInmueble") 
+        as |inmueble_i|}}
+          {{inmueble_i.identificador}}
+      {{/power-select}}
     </div>
 
     <div class="signUp-input">

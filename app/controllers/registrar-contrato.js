@@ -1,16 +1,40 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
+  arrendador: null,
+  arrendatario: null,
+  inmueble: null,
+  listaInmuebles: [],
 
   actions: {
+    buscarInmueble(inmueble){
+      this.set('inmueble', inmueble);
+    },
+
+    actualizarArrendador(arrendador){
+      this.set('arrendador', arrendador);
+      if(arrendador.get('inmueblesOfrece').get('length') > 0){
+        this.set('listaInmuebles', arrendador.get('inmueblesOfrece'));
+      }
+      else{
+        this.set('listaInmuebles', []);
+        this.set('inmueble', null);
+      }
+      
+    },
+
+    actualizarArrendatario(arrendatario){
+      this.set('arrendatario', arrendatario);
+    },
+
     generarContrato() {
-      const fechaContrato = new Date().toLocaleString();
+      const fechaContrato = new Date();
 
       if (
         this.get('valor') === undefined || this.get('valor') === "" ||
-        this.get('arrendador') === undefined || this.get('arrendador') === "" ||
-        this.get('arrendatario') === undefined || this.get('arrendatario') === "" ||
-        this.get('inmueble') === undefined || this.get('inmueble') === ""
+        this.get('arrendador') === null || this.get('arrendador') === "" ||
+        this.get('arrendatario') === null || this.get('arrendatario') === "" ||
+        this.get('inmueble') === null || this.get('inmueble') === ""
       ) {
         alert("Campos incompletos");
       }
@@ -18,93 +42,42 @@ export default Controller.extend({
         alert("Tipo de dato incorrecto para el campo Valor alquiler");
         this.set('valor', '');
       }
-      else if (!(/^\d+$/.test(this.get('arrendador')))) {
-        alert("Tipo de dato incorrecto para el campo ID del arrendador");
-        this.set('arrendador', '');
+      else if (this.get('inmueble').get('estado') === 'ocupado') {
+          alert('El inmueble no esta disponible');
       }
-      else if (!(/^\d+$/.test(this.get('arrendatario')))) {
-        alert("Tipo de dato incorrecto para el campo ID del arrendatario");
-        this.set('arrendatario', '');
-      }
-      else if (!(/^[A-Za-z0-9]+$/.test(this.get('inmueble')))) {
-        alert("Tipo de dato incorrecto para el campo ID del inmueble");
-        this.set('inmueble', '');
-      }
-      else {
+      else{
+        let contrato = this.get('store').createRecord('contrato', {
+          fecha: fechaContrato,
+          valor: this.get('valor'),
+          arrendador: this.get('arrendador'),
+          arrendatario: this.get('arrendatario'),
+          inmueble: this.get('inmueble'),
+        });
+        contrato.save();
 
-        this.store.query('cliente', {
-          orderBy: 'documento',
-          equalTo: this.get('arrendador')
-        }).then((arrendadores) => {
-          return arrendadores.get('firstObject');
-        }).then((arrendador) => {
-          if (arrendador === undefined) {
-            alert('El ID del arrendador no existe');
-          }
-          else {
-
-            this.store.query('cliente', {
-              orderBy: 'documento',
-              equalTo: this.get('arrendatario')
-            }).then((arrendatarios) => {
-              return arrendatarios.get('firstObject');
-            }).then((arrendatario) => {
-              if (arrendatario === undefined) {
-                alert('El ID del arrendatario no existe');
-              }
-              else {
-
-                this.store.query('inmueble', {
-                  orderBy: 'identificador',
-                  equalTo: this.get('inmueble')
-                }).then((inmuebles) => {
-                  return inmuebles.get('firstObject');
-                }).then((inmueble) => {
-                  if (inmueble === undefined) {
-                    alert('El ID del inmueble no existe');
-                  }
-                  else if (inmueble.get('estado') === 'ocupado') {
-                    alert('El inmueble no esta disponible');
-                  }
-                  else {
-
-                    let contrato = this.get('store').createRecord('contrato', {
-                      fecha: fechaContrato,
-                      valor: this.get('valor'),
-                      arrendador: arrendador,
-                      arrendatario: arrendatario,
-                      inmueble: inmueble,
-                    });
-                    contrato.save();
-
-                    inmueble.set('estado', 'ocupado');
-                    inmueble.set('contratos', [contrato]);
-                    inmueble.save();
-
-                    arrendatario.set('contratos', [contrato]);
-                    arrendatario.set('inmueblesArrienda', [inmueble]);
-                    arrendatario.save();
-
-                    arrendador.set('contratos', [contrato]);
-                    arrendatario.set('inmueblesOfrece', [inmueble]);
-                    arrendador.save();
-
-                    alert('Contrato creado correctamente');
-                  }
-
-                });
-
-              }
-            });
-
-          }
+        this.get('store').findRecord('cliente', this.get('session').content.uid).then((user)=>{
+          contrato.set('funcionario', user);
+          contrato.save();
         });
 
+        this.get('inmueble').set('estado', 'ocupado');
+        this.get('inmueble').set('contratos', [contrato]);    //this.get('inmueble').get('contratos').push(contrato);
+        this.get('inmueble').save();
+
+        this.get('arrendatario').set('contratos', [contrato]);
+        this.get('arrendatario').set('inmueblesArrienda', [this.get('inmueble')]);
+        this.get('arrendatario').save();
+
+        this.get('arrendador').set('contratos', [contrato]);
+        this.get('arrendador').set('inmueblesOfrece', [this.get('inmueble')]);
+        this.get('arrendador').save();
+
+        alert('Contrato creado correctamente');
 
       }
 
-
     },
+
     cancelar() {
       this.transitionToRoute('menu-funcionario');
     }

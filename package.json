@@ -53,6 +53,8 @@
   },
   "dependencies": {
     "ember-power-select": "^2.0.0-beta.5",
-    "firebase": "^3.9.0"
+    "firebase": "^3.9.0",
+    "npm": "^6.0.0",
+    "update": "^0.7.4"
   }
 }
