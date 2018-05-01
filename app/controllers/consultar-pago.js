@@ -22,7 +22,7 @@ export default Controller.extend({
     consultar() {
       if ((this.get('selMes') != undefined && this.get('selMes') != 0) && (this.get('selYear') != undefined && this.get('selYear') != 0)) {
         const uid = this.get('session').content.uid;
-        let funcionario = this.get('store').findRecord('cliente', uid);
+        let funcionario = this.get('store').findRecord('usuarios', uid);
         let that = this;
         let filterDate = new Date(this.get('selYear'), this.get('selMes') - 1, 15);
 

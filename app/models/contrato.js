@@ -8,6 +8,6 @@ export default DS.Model.extend({
     arrendatario: DS.belongsTo('cliente', { inverse: null}),
     inmueble: DS.belongsTo('inmueble'),
     
-    //funcionario: DS.belongsTo(''),
-    funcionario: DS.attr('string'),
+    funcionario: DS.belongsTo('usuarios'),
+    //funcionario: DS.attr('string'),
 });

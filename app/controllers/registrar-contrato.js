@@ -55,7 +55,7 @@ export default Controller.extend({
         });
         contrato.save();
 
-        this.get('store').findRecord('cliente', this.get('session').content.uid).then((user)=>{
+        this.get('store').findRecord('usuarios', this.get('session').content.uid).then((user)=>{
           contrato.set('funcionario', user);
           contrato.save();
         });
