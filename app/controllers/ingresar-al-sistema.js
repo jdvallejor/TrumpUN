@@ -21,7 +21,7 @@ export default Controller.extend({
           let uid = data.uid;
 
           controller.get('firebaseApp').database().ref('usuarios').child(uid).once('value').then(function (snapshot) {
-            controller.get('usuarioActual').agregar(snapshot.val());
+            controller.get('usuarioActual').updateActiveUser(snapshot.val());
             if (snapshot.val().rol === 0) {
               controller.get('target').replaceWith('menu-cliente')
             } else if (snapshot.val().rol === 1) {

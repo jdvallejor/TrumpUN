@@ -9,6 +9,7 @@ export default Route.extend({
   },
   beforeModel:
     function () {
+      this.get('usuarioActual').getActiveUser();
       return this.get('session').fetch().catch(function () {
       })
     }
@@ -16,8 +17,9 @@ export default Route.extend({
   actions: {
     salir: function () {
       this.get('session').close();
-      this.replaceWith('bienvenida');
+      localStorage.clear();
       this.get('usuarioActual').reset();
+      this.transitionTo('bienvenida');
     }
   }
 })

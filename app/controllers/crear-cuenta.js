@@ -27,7 +27,7 @@ export default Controller.extend({
                 celular: controller.get('celular'),
                 rol: 0
               }
-              controller.get('usuarioActual').agregar(user)
+              controller.get('usuarioActual').updateActiveUser(user)
               controller.get('target').replaceWith('menu-cliente')
             })
           }).catch(function(error){

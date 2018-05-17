@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import Ember from 'ember';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   selYear: 2015,
@@ -7,7 +7,7 @@ export default Controller.extend({
   meses: Array(12).fill(1).map((e, i) => i + 1),
   years: Array(40).fill(2000).map((e, i) => e + i),
   salarioBase: null,
-  listaLength: Ember.computed('listaContratos.length', function () {
+  listaLength: computed('listaContratos.length', function () {
     return this.get('listaContratos').length > 0;
   }),
   listaContratos: [],
@@ -20,9 +20,9 @@ export default Controller.extend({
       this.set('selYear', year);
     },
     consultar() {
-      if ((this.get('selMes') != undefined && this.get('selMes') != 0) && (this.get('selYear') != undefined && this.get('selYear') != 0)) {
+      if ((this.get('selMes') !== undefined && this.get('selMes') !== 0) && (this.get('selYear') !== undefined && this.get('selYear') !== 0)) {
         const uid = this.get('session').content.uid;
-        let funcionario = this.get('store').findRecord('usuarios', uid);
+        let funcionario = this.get('store').findRecord('funcionario', uid);
         let that = this;
         let filterDate = new Date(this.get('selYear'), this.get('selMes') - 1, 15);
 
@@ -37,7 +37,7 @@ export default Controller.extend({
           }).then(contratos => {
             let contratosFiltrados = contratos.toArray().filter(x => {
               let date = new Date(x.get('fecha'));
-              if (date.getMonth() == filterDate.getMonth() && date.getFullYear() == filterDate.getFullYear()) {
+              if (date.getMonth() === filterDate.getMonth() && date.getFullYear() === filterDate.getFullYear()) {
                 return true;
               }
               return false;

@@ -1,17 +1,18 @@
 import Controller from '@ember/controller';
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { equal } from '@ember/object/computed';
 import {inject as service} from '@ember/service';
 
 export default Controller.extend({
-  isBienvenida: Ember.computed.equal('currentRouteName', 'bienvenida'),
+  isBienvenida: equal('currentRouteName', 'bienvenida'),
   usuarioActual: service('usuario-actual'),
-  usuario: Ember.computed('usuarioActual.usuario', function () {
-    return this.get('usuarioActual').getUsuario();
+  usuario: computed('usuarioActual.usuario', function () {
+    return this.get('usuarioActual').getActiveUser();
   }),
-  rol: Ember.computed('usuarioActual.usuario.rol', function () {
+  rol: computed('usuarioActual.usuario.rol', function () {
     return this.get('usuarioActual').getRol();
   }),
-  mainPage: Ember.computed('usuarioActual.usuario.page', function () {
+  mainPage: computed('usuarioActual.usuario.page', function () {
     return this.get('usuarioActual').getPage();
   }),
 });

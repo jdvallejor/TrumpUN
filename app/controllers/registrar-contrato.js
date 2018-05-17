@@ -20,7 +20,7 @@ export default Controller.extend({
         this.set('listaInmuebles', []);
         this.set('inmueble', null);
       }
-      
+
     },
 
     actualizarArrendatario(arrendatario){
@@ -55,7 +55,7 @@ export default Controller.extend({
         });
         contrato.save();
 
-        this.get('store').findRecord('usuarios', this.get('session').content.uid).then((user)=>{
+        this.get('store').findRecord('usuario', this.get('session').content.uid).then((user)=>{
           contrato.set('funcionario', user);
           contrato.save();
         });
