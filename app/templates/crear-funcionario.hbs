@@ -1,0 +1,38 @@
+<div class="main-container">
+  <div class="col-md-6 login-marco">
+    <p>Ingrese la información del funcionario</p>
+    <div class="signUp-input">
+      <p>Correo</p>
+      {{input type="text" value=correo class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="signUp-input">
+      <p>Contraseña</p>
+      {{input type="password" value=password class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="signUp-input">
+      <p>Nombre</p>
+      {{input type="text" value=nombre class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="signUp-input">
+      <p>Documento</p>
+      {{input type="text" value=documento class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="signUp-input">
+      <p>Celular</p>
+      {{input type="text" value=celular class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="signUp-input">
+      <p>Salario Base</p>
+      {{input type="text" value=salario class="form-control col-sm-11 col-md-9"}}
+    </div>
+    <div class="text-right">
+      <button {{action 'registrar' on="mouseUp"}} class="btn btn-primary">
+        Registrar
+      </button>
+    </div>
+  </div>
+</div>
+{{#bs-modal-simple open=ok title="Success" size="sm" onHidden=(action (mut ok) false)}}
+  Funcionario creado
+{{/bs-modal-simple}}
+{{outlet}}

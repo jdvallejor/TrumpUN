@@ -15,6 +15,8 @@ Router.map(function () {
   this.route('menu-jefe');
   this.route('consultar-pago');
   this.route('registrar-contrato');
+  this.route('crear-funcionario');
+  this.route('consultar-pago-funcionarios');
 });
 
 export default Router;

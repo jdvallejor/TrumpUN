@@ -14,13 +14,13 @@ export default Route.extend({
         if (rolN === 0) {
           this.transitionTo('menu-cliente');
         } else if (rolN === 1) {
-          this.transitionTo('menu-funcionario');
-        } else if (rolN === 2) {
-          this.transitionTo('menu-jefe')
+          this.transitionTo('menu-funcionario')
         }
       } else {
         this.replaceWith('bienvenida')
       }
+    } else {
+      this.replaceWith('bienvenida')
     }
   }
 });

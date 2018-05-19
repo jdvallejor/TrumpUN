@@ -1,1 +1,18 @@
+{{#if session.isAuthenticated}}
+  <div class="main-container">
+    <div class="login-marco col-md-4 text-center">
+      <p class="h2 font-weight-bold">Menú Jefe</p>
+      <div class="p-1">
+        {{#link-to "crear-funcionario" tagName= "button" class="btn btn-primary main-btn-size"}}
+          Crear Funcionario
+        {{/link-to}}
+      </div>
+      <div class="p-1">
+        {{#link-to "consultar-pago-funcionarios" tagName= "button" class="btn btn-primary main-btn-size"}}
+          Consultar Pago a Funcionarios
+        {{/link-to}}
+      </div>
+    </div>
+  </div>
+{{/if}}
 {{outlet}}
