@@ -6,5 +6,5 @@ export default DS.Model.extend({
   celular: DS.attr('number'),
   salario: DS.attr('number'),
 
-  contrato: DS.hasMany('contrato'),
+  contratos: DS.hasMany('contrato'),
 });

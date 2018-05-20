@@ -21,7 +21,7 @@ export default Controller.extend({
     },
     consultar() {
       if ((this.get('selMes') !== undefined && this.get('selMes') !== 0) && (this.get('selYear') !== undefined && this.get('selYear') !== 0)) {
-        const uid = this.get('session').content.uid;
+        const uid = '-' + this.get('session').content.uid;
         let funcionario = this.get('store').findRecord('funcionario', uid);
         let that = this;
         let filterDate = new Date(this.get('selYear'), this.get('selMes') - 1, 15);
@@ -30,14 +30,10 @@ export default Controller.extend({
 
           that.set('salarioBase', func.get('salario'));
 
-          let lista = this.get('store').query('contrato', {
-            filter: {
-              funcionario: uid
-            }
-          }).then(contratos => {
+          let lista = this.get('store').findAll('contrato').then(contratos => {
             let contratosFiltrados = contratos.toArray().filter(x => {
               let date = new Date(x.get('fecha'));
-              if (date.getMonth() === filterDate.getMonth() && date.getFullYear() === filterDate.getFullYear()) {
+              if (x.get('funcionario').get('id') === uid && date.getMonth() === filterDate.getMonth() && date.getFullYear() === filterDate.getFullYear()) {
                 return true;
               }
               return false;

@@ -16,13 +16,13 @@ export default Controller.extend({
             password: controller.get('password')
           }).then(function(userData){
 
-            controller.get('firebaseApp').database().ref('usuarios').child(userData.uid).set({
+            controller.get('firebaseApp').database().ref('usuarios').child('-'+ userData.uid).set({
               nombre: controller.get('nombre'),
               email: controller.get('correo'),
               rol: 0
             }).then(function () {
 
-              controller.get('firebaseApp').database().ref('clientes').child(userData.uid).set({
+              controller.get('firebaseApp').database().ref('clientes').child('-'+ userData.uid).set({
                 nombre: controller.get('nombre'),
                 documento: controller.get('documento'),
                 celular: controller.get('celular')

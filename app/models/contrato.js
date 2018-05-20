@@ -9,5 +9,4 @@ export default DS.Model.extend({
     inmueble: DS.belongsTo('inmueble'),
 
     funcionario: DS.belongsTo('funcionario'),
-    //funcionario: DS.attr('string'),
 });

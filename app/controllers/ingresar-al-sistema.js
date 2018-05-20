@@ -18,7 +18,7 @@ export default Controller.extend({
           password: this.get('password')
         }).then(function (data) {
           // Realizar consulta para el rol
-          let uid = data.uid;
+          let uid = '-' + data.uid;
 
           controller.get('firebaseApp').database().ref('usuarios').child(uid).once('value').then(function (snapshot) {
             controller.get('usuarioActual').updateActiveUser(snapshot.val());

@@ -12,13 +12,13 @@ export default Controller.extend({
         .createUserWithEmailAndPassword(this.get('correo'), this.get('password'))
         .then(function(userData){
 
-          controller.get('firebaseApp').database().ref('usuarios').child(userData.uid).set({
+          controller.get('firebaseApp').database().ref('usuarios').child('-'+ userData.uid).set({
             nombre: controller.get('nombre'),
             email: controller.get('correo'),
             rol: 1
           }).then(function () {
 
-            controller.get('firebaseApp').database().ref('funcionarios').child(userData.uid).set({
+            controller.get('firebaseApp').database().ref('funcionarios').child('-'+ userData.uid).set({
               nombre: controller.get('nombre'),
               documento: controller.get('documento'),
               celular: controller.get('celular'),
