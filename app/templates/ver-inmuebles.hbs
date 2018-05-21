@@ -1,8 +1,27 @@
+<br>
 
-{{models-table
-    data=model.inmueblesOfrece
-    columns=columns
-    columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
-}}
+<div class="table-inmueblesOfrece">
+    {{models-table
+        data=model.inmueblesOfrece
+        columns=columns
+        columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
+        groupedHeaders=groupedHeader1
+        showColumnsDropdown=false
+        
+    }}
+</div>
+
+<br>
+
+<div class="table-inmueblesArrienda">
+    {{models-table
+        data=model.inmueblesArrienda
+        columns=columns
+        columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
+        groupedHeaders=groupedHeader2
+        showColumnsDropdown=false
+    }}
+</div>
+
 
 {{outlet}}

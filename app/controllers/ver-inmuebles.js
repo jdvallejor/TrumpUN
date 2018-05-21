@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 
+
 export default Controller.extend({
     columns: [
         {
@@ -16,7 +17,7 @@ export default Controller.extend({
           },
         {
           "propertyName": "area_total",
-          "title": "Área total"
+          "title": "Área total (m^2)"
         },
         {
           "propertyName": "nro_pisos",
@@ -38,10 +39,31 @@ export default Controller.extend({
           "title": "Contratos",
           "component": "contratosRow"
         }
-      ],
-      actions: {
+    ],
+    
+    groupedHeader1: [
+        [
+          {
+            "title": "Inmuebles Ofrece",
+            "colspan": 9
+          }
+        ],
+    ],
+
+    groupedHeader2: [
+        [
+          {
+            "title": "Inmuebles Arrienda",
+            "colspan": 9
+          }
+        ],
+    ],
+
+    //themeInstance: themeBootstrap3,
+
+    actions: {
         contratos(record){
             alert(record.get('identificador'))
         }
-      }
+    }
 });
