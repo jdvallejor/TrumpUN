@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
     identificador: DS.attr('string'),
-    direccion: DS.attr('date'),
+    direccion: DS.attr('string'),
     estrato: DS.attr('number'),
     area_total: DS.attr('number'),
     nro_pisos: DS.attr('number'),

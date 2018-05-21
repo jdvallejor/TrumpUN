@@ -17,6 +17,7 @@ Router.map(function () {
   this.route('registrar-contrato');
   this.route('crear-funcionario');
   this.route('consultar-pago-funcionarios');
+  this.route('ver-inmuebles');
 });
 
 export default Router;
