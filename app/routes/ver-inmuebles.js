@@ -24,10 +24,9 @@ export default Route.extend({
         }
     },*/
     model(){
-        /*this.store.query('cliente', { //queryRecord
-            orderBy: 'id',
-            equalTo: '-LBRqe4zcRC0rBifjcY1'
-        });*/
+        /*
+        return this.store.findRecord('cliente', usuario.get('id'));
+        */
         return this.store.findRecord('cliente', '-LBRqe4zcRC0rBifjcY1');
     }
 });

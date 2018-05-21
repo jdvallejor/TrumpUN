@@ -10,8 +10,9 @@ export default DS.Model.extend({
     nro_banos: DS.attr('number'),
     estado: DS.attr('string'),
     
-    //cuarto: DS.hasMany('cuarto'),
-    //bano: DS.hasMany('bano'),
+    cuarto: DS.hasMany('cuarto'),
+    bano: DS.hasMany('bano'),
+
     arrendatario: DS.belongsTo('cliente', { inverse: 'inmueblesArrienda' , key: 'documento'}),
     arrendador: DS.belongsTo('cliente', { inverse: 'inmueblesOfrece' , key: 'documento'}),
     contratos: DS.hasMany('contrato'),
