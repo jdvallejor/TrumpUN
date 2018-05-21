@@ -1,0 +1,6 @@
+{{#if isExpanded}}
+  <a href="#" {{action "collapseRow" index record bubbles=false}}>Menos<i class="minus icon"></i></a>
+{{else}}
+  <a href="#" {{action "expandRow" index record bubbles=false}}>Mas<i class="plus icon"></i></a>
+{{/if}}
+{{yield}}

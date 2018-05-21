@@ -4,6 +4,10 @@ import Controller from '@ember/controller';
 export default Controller.extend({
     columns: [
         {
+            "component": "inmueble-expand-toggle",
+            "mayBeHidden": false
+        },
+        {
           "propertyName": "identificador",
           "title": "ID"
         },
@@ -40,12 +44,12 @@ export default Controller.extend({
           "component": "contratosRow"
         }
     ],
-    
+
     groupedHeader1: [
         [
           {
             "title": "Inmuebles Ofrece",
-            "colspan": 9
+            "colspan": 10
           }
         ],
     ],
@@ -54,12 +58,14 @@ export default Controller.extend({
         [
           {
             "title": "Inmuebles Arrienda",
-            "colspan": 9
+            "colspan": 10
           }
         ],
     ],
 
-    //themeInstance: themeBootstrap3,
+    expandedRowComponent: 'inmueble-expanded-row',
+
+    expandedItems: [],
 
     actions: {
         contratos(record){
