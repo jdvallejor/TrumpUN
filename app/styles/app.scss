@@ -322,4 +322,42 @@ footer > .row > div:not(:last-child):after {
 /* //////////////////////////////////////////////////////////////////////*/
 
 
+
+/* //////////////////////////////////////////////////////////////////////*/
+/* CSS DEL CU4 */
+/* //////////////////////////////////////////////////////////////////////*/
+
+/* Style tab links */
+.tablinkInmueble {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablinkInmueble:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontentInmueble {
+  color: black;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#InmOfrece {background-color: white;}
+#InmArrienda {background-color: white;}
+
+/* //////////////////////////////////////////////////////////////////////*/
+
+
 @import "ember-power-select";
+
+

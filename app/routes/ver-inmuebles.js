@@ -25,8 +25,8 @@ export default Route.extend({
     },*/
     model(){
         /*
-        return this.store.findRecord('cliente', usuario.get('id'));
+        return this.store.findRecord('cliente', this.get('session').content.uid);
         */
-        return this.store.findRecord('cliente', '-LBRqe4zcRC0rBifjcY1');
+        return this.store.findRecord('cliente', '-LD4WTYHyNu9dXDaClP4');
     }
 });

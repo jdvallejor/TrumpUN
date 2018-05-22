@@ -70,6 +70,25 @@ export default Controller.extend({
     actions: {
         contratos(record){
             alert(record.get('identificador'))
+        },
+
+        regresar(){
+            this.transitionToRoute('menu-cliente');
+        },
+
+        changeTab(pageName, ind){
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontentInmueble");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinkInmueble");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            tablinks[ind].style.backgroundColor = "red";
+
+            document.getElementById(pageName).style.display = "block";
         }
     }
 });

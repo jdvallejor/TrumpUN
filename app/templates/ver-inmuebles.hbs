@@ -1,32 +1,41 @@
-<br>
 
-<div class="table-inmueblesOfrece">
-    {{models-table
-        data=model.inmueblesOfrece
-        columns=columns
-        columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
-        groupedHeaders=groupedHeader1
-        showColumnsDropdown=false
 
-        expandedRowComponent=expandedRowComponent
-        multipleExpand=false
-    }}
+<button class="tablinkInmueble" onclick={{action "changeTab" 'InmOfrece' 0}} id="defaultOpen">Inmuebles Ofrece</button>
+<button class="tablinkInmueble" onclick={{action "changeTab" 'InmArrienda' 1}}>Inmuebles Arrienda</button>
+<button class="tablinkInmueble" onclick={{action "regresar"}}>Regresar</button>
+
+<div id="InmOfrece" class="tabcontentInmueble">
+  <div class="table-inmueblesOfrece">
+        {{models-table
+            data=model.inmueblesOfrece
+            columns=columns
+            columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
+            groupedHeaders=groupedHeader1
+            showColumnsDropdown=false
+
+            expandedRowComponent=expandedRowComponent
+            multipleExpand=false
+        }}
+    </div>
 </div>
 
-<br>
+<div id="InmArrienda" class="tabcontentInmueble">
+  <div class="table-inmueblesArrienda">
+        {{models-table
+            data=model.inmueblesArrienda
+            columns=columns
+            columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
+            groupedHeaders=groupedHeader2
+            showColumnsDropdown=false
 
-<div class="table-inmueblesArrienda">
-    {{models-table
-        data=model.inmueblesArrienda
-        columns=columns
-        columnComponents=(hash contratosRow=(component "contratos-row-comp" onClick=(action "contratos")))
-        groupedHeaders=groupedHeader2
-        showColumnsDropdown=false
-
-        expandedRowComponent=expandedRowComponent
-        multipleExpand=false
-    }}
+            expandedRowComponent=expandedRowComponent
+            multipleExpand=false
+        }}
+    </div>
 </div>
 
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
 
 {{outlet}}

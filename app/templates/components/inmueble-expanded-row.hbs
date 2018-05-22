@@ -56,7 +56,7 @@ body {font-family: Arial;}
 <div class="detail-inm-exp-row">
 
     <div class="tab">
-        <button class="tablinks" onclick={{action 'changeTab' 'CuartoID'}} id="defaultOpen">Cuartos</button>
+        <button class="tablinks" onclick={{action 'changeTab' 'CuartoID'}} id="defaultOpenExt">Cuartos</button>
         <button class="tablinks" onclick={{action 'changeTab' 'BanoID'}}>Baños</button>
         <button class="tablinks" onclick={{action 'changeTab' 'TipoINM'}}>Tokyo</button>
     </div>
@@ -85,10 +85,12 @@ body {font-family: Arial;}
                 <th>Area (m^2)</th>
                 <th>Tiene ducha</th>
             </tr>
+            {{#each record.bano as |bano|}}
             <tr>
-                <td>1</td>
-                <td>si</td>
+                <td>{{bano.area}}</td>
+                <td>{{bano.tiene_ducha}}</td>
             </tr>
+            {{/each}}
         </table>
     </div>
 
@@ -99,7 +101,7 @@ body {font-family: Arial;}
 
 </div>
 <script>
-    document.getElementById("defaultOpen").click();
+    document.getElementById("defaultOpenExt").click();
 </script>
 
 {{yield}}
