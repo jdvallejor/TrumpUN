@@ -1,5 +1,17 @@
-<h1>Menú cliente</h1>
 {{#if session.isAuthenticated}}
-  <p>Logged as: {{model.nombre}}</p>
+
+  <div class="main-container">
+    <div class="login-marco col-md-4 text-center">
+      <p class="h2 font-weight-bold">Menú cliente</p>
+      <div class="p-1">
+        {{#link-to "ver-inmuebles" tagName= "button" class="btn btn-primary main-btn-size"}}
+          Ver Inmuebles
+        {{/link-to}}
+      </div>
+      
+    </div>
+  </div>
+
 {{/if}}
+
 {{outlet}}
