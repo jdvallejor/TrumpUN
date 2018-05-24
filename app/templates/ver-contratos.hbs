@@ -1,0 +1,23 @@
+<button class="tablinkContratos" onclick={{action "regresar"}}>Regresar</button>
+
+<div class="tableContratos">
+{{#if model.contratos.length}}
+
+    <div class="table-inmueblesOfrece">
+        {{models-table
+            data=model.contratos
+            columns=columns
+            showColumnsDropdown=false
+            
+            columnComponents=(hash
+                arrendadorCol=(component "ver-contratos-arrendador-col")
+                arrendatarioCol=(component "ver-contratos-arrendatario-col")
+                funcionarioCol=(component "ver-contratos-funcionario-col")
+            )
+        }}
+    </div>
+
+{{else}}
+    <h3>No hay contratos registrados para este inmueble</h3>
+{{/if}}
+</div>

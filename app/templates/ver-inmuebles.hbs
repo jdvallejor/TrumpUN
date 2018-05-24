@@ -5,6 +5,7 @@
 <button class="tablinkInmueble" onclick={{action "regresar"}}>Regresar</button>
 
 <div id="InmOfrece" class="tabcontentInmueble">
+{{#if model.inmueblesOfrece.length}}
   <div class="table-inmueblesOfrece">
         {{models-table
             data=model.inmueblesOfrece
@@ -17,9 +18,13 @@
             multipleExpand=false
         }}
     </div>
+{{else}}
+    <h3>No hay inmuebles ofrecidos</h3>
+{{/if}}
 </div>
 
 <div id="InmArrienda" class="tabcontentInmueble">
+{{#if model.inmueblesArrienda.length}}
   <div class="table-inmueblesArrienda">
         {{models-table
             data=model.inmueblesArrienda
@@ -32,6 +37,9 @@
             multipleExpand=false
         }}
     </div>
+{{else}}
+    <h3>No hay inmuebles arrendados</h3>
+{{/if}}
 </div>
 
 <script>

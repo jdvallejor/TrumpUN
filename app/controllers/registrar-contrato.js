@@ -58,6 +58,8 @@ export default Controller.extend({
         this.get('store').findRecord('funcionario', '-' + this.get('session').content.uid).then((user)=>{
           contrato.set('funcionario', user);
           contrato.save();
+          user.set('contratos', [contrato]);
+          user.save();
         });
 
         this.get('inmueble').set('estado', 'ocupado');

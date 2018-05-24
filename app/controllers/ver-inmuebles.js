@@ -69,7 +69,7 @@ export default Controller.extend({
 
     actions: {
         contratos(record){
-            alert(record.get('identificador'))
+            this.transitionToRoute('ver-contratos', record.get('id'));
         },
 
         regresar(){

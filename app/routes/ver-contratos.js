@@ -23,10 +23,7 @@ export default Route.extend({
             this.replaceWith('bienvenida')
         }
     },*/
-    model(){
-        /*
-        return this.store.findRecord('cliente', this.get('session').content.uid);
-        */
-        return this.store.findRecord('cliente', '-LD4WTYJv8qdjjtSL-mi');//'-LD4WTYHyNu9dXDaClP4');
+    model({id}){
+        return this.store.findRecord('inmueble', id);
     }
 });

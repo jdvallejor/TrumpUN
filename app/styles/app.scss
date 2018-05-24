@@ -355,6 +355,30 @@ footer > .row > div:not(:last-child):after {
 #InmOfrece {background-color: white;}
 #InmArrienda {background-color: white;}
 
+
+
+.tablinkContratos {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+.tablinkContratos:hover {
+  background-color: #777;
+}
+/* Style the tab content (and add height:100% for full page content) */
+.tableContratos {
+  color: black;
+  display: block;
+  padding: 100px 20px;
+  height: 100%;
+}
+
 /* //////////////////////////////////////////////////////////////////////*/
 
 
