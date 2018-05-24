@@ -17,10 +17,10 @@ export default Route.extend({
           this.transitionTo('menu-jefe')
         }
       } else {
-        this.replaceWith('bienvenida')
+        this.replaceWith('ingresar-al-sistema')
       }
     } else {
-      this.replaceWith('bienvenida')
+      this.replaceWith('ingresar-al-sistema')
     }
   },
   model(){

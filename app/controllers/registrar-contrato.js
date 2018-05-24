@@ -14,6 +14,7 @@ export default Controller.extend({
     actualizarArrendador(arrendador){
       this.set('arrendador', arrendador);
       if(arrendador.get('inmueblesOfrece').get('length') > 0){
+        this.set('inmueble', null);
         this.set('listaInmuebles', arrendador.get('inmueblesOfrece'));
       }
       else{
@@ -58,24 +59,30 @@ export default Controller.extend({
         this.get('store').findRecord('funcionario', '-' + this.get('session').content.uid).then((user)=>{
           contrato.set('funcionario', user);
           contrato.save();
-          user.set('contratos', [contrato]);
+          //user.set('contratos', [contrato]);
+          user.get('contratos').pushObject(contrato);
           user.save();
         });
 
+        //this.get('inmueble').set('contratos', [contrato]);
         this.get('inmueble').set('estado', 'ocupado');
-        this.get('inmueble').set('contratos', [contrato]);    //this.get('inmueble').get('contratos').push(contrato);
+        this.get('inmueble').get('contratos').pushObject(contrato);
         this.get('inmueble').save();
 
-        this.get('arrendatario').set('contratos', [contrato]);
-        this.get('arrendatario').set('inmueblesArrienda', [this.get('inmueble')]);
+        //this.get('arrendatario').set('contratos', [contrato]);
+        //this.get('arrendatario').set('inmueblesArrienda', [this.get('inmueble')]);
+        this.get('arrendatario').get('contratos').pushObject(contrato);
+        this.get('arrendatario').get('inmueblesArrienda').pushObject(this.get('inmueble'));
         this.get('arrendatario').save();
 
-        this.get('arrendador').set('contratos', [contrato]);
-        this.get('arrendador').set('inmueblesOfrece', [this.get('inmueble')]);
+        //this.get('arrendador').set('contratos', [contrato]);
+        //this.get('arrendador').set('inmueblesOfrece', [this.get('inmueble')]);
+        this.get('arrendador').get('contratos').pushObject(contrato);
+        this.get('arrendador').get('inmueblesOfrece').pushObject(this.get('inmueble'));
         this.get('arrendador').save();
 
         alert('Contrato creado correctamente');
-
+        this.limpiar();
       }
 
     },
@@ -83,6 +90,14 @@ export default Controller.extend({
     cancelar() {
       this.transitionToRoute('menu-funcionario');
     }
+  },
+
+  limpiar(){
+    this.set('inmueble', null);
+    this.set('listaInmuebles', []);
+    this.set('arrendatario', null);
+    this.set('arrendador', null);
+    this.set('valor', 0);
   },
 
 });
