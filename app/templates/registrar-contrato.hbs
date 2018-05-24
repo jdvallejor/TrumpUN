@@ -2,6 +2,10 @@
   <div class="col-md-6 login-marco">
     <p class="h3 font-weight-bold">Registrar Contrato</p>
 
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
+
     <div class="signUp-input">
       <p>ID del arrendador</p>
       {{#power-select

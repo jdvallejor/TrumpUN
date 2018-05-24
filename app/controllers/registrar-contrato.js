@@ -1,10 +1,15 @@
 import Controller from '@ember/controller';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
+import { get } from '@ember/object';
 
 export default Controller.extend({
   arrendador: null,
   arrendatario: null,
   inmueble: null,
   listaInmuebles: [],
+
+  flashMessages: inject(),
 
   actions: {
     buscarInmueble(inmueble){
@@ -37,14 +42,35 @@ export default Controller.extend({
         this.get('arrendatario') === null || this.get('arrendatario') === "" ||
         this.get('inmueble') === null || this.get('inmueble') === ""
       ) {
-        alert("Campos incompletos");
+        //alert("Campos incompletos");
+        get(this, 'flashMessages').clearMessages();
+        get(this, 'flashMessages').danger('Campos incompletos',{
+          //timeout: 3000,
+          priority: 100,
+          sticky: true,
+          showProgress: true
+        });
       }
       else if (!(/^\d+$/.test(this.get('valor')))) {
-        alert("Tipo de dato incorrecto para el campo Valor alquiler");
+        //alert("Tipo de dato incorrecto para el campo Valor alquiler");
+        get(this, 'flashMessages').clearMessages();
+        get(this, 'flashMessages').danger('Tipo de dato incorrecto para el campo Valor alquiler',{
+          //timeout: 3000,
+          priority: 100,
+          sticky: true,
+          showProgress: true
+        });
         this.set('valor', '');
       }
       else if (this.get('inmueble').get('estado') === 'ocupado') {
-          alert('El inmueble no esta disponible');
+          //alert('El inmueble no esta disponible');
+        get(this, 'flashMessages').clearMessages();
+        get(this, 'flashMessages').danger('El inmueble no esta disponible',{
+          //timeout: 3000,
+          priority: 100,
+          sticky: true,
+          showProgress: true
+        });
       }
       else{
         let contrato = this.get('store').createRecord('contrato', {
@@ -81,7 +107,14 @@ export default Controller.extend({
         this.get('arrendador').get('inmueblesOfrece').pushObject(this.get('inmueble'));
         this.get('arrendador').save();
 
-        alert('Contrato creado correctamente');
+        //alert('Contrato creado correctamente');
+        get(this, 'flashMessages').clearMessages();
+        get(this, 'flashMessages').success('Contrato creado correctamente',{
+          timeout: 4000,
+          priority: 100,
+          sticky: false,
+          showProgress: true
+        });
         this.limpiar();
       }
 
