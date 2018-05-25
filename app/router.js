@@ -20,6 +20,7 @@ Router.map(function () {
   this.route('ver-inmuebles');
   this.route('ver-contratos', {path: '/ver-contratos/:id'});
   this.route('registrar-inmueble');
+  this.route('ver-todos-inmuebles');
 });
 
 export default Router;

@@ -1,0 +1,22 @@
+<button class="tablinkContratos" onclick={{action "regresar"}}>Regresar</button>
+
+<div class="tableContratos">
+
+{{#if model.length}}
+    <h1>LISTA INMUEBLES</h1>
+    <div class="table-inmueblesOfrece">
+        {{models-table
+            data=model
+            columns=columns
+            showColumnsDropdown=false
+            expandedRowComponent=expandedRowComponent
+        }}
+    </div>
+
+{{else}}
+    <h3>No hay inmuebles</h3>
+{{/if}}
+
+
+</div>
+{{outlet}}
