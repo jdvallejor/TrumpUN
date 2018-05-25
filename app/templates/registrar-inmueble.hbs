@@ -1,0 +1,148 @@
+<div class="main-container pb-5">
+  <div class="col-md-6 login-marco">
+    <p class="h3 font-weight-bold">Registrar Inmueble</p>
+
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
+
+    <div class="signUp-input">
+      <p>Dirección: </p>
+      {{input type="text" value=direccion class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Estrato: </p>
+      {{input type="text" value=estrato class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Área Total: </p>
+      {{input type="text" value=area class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Número de pisos: </p>
+      {{input type="text" value=npisos class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Número de Balcones: </p>
+      {{input type="text" value=nbalcones class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    <div class="signUp-input">
+      <p>Número de Cuartos: </p>
+      {{input type="text" value=ncuartos focus-out="updateCuartos" key-press="updateCuartos"
+              class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    {{#if ncuartosarray}}
+      <div class="login-marco">
+        <h3>Cuartos: </h3>
+        {{#each ncuartosarray as |cuarto|}}
+          <div class="signUp-input">
+            <h4>Cuarto {{cuarto.numero}}</h4>
+            <hr>
+            <p>Área : </p>
+            {{input type="text" value=cuarto.area class="form-control col-sm-11 col-md-9"}}
+            <p>Tiene Armario ? : {{input type="checkbox" checked=cuarto.tiene_armario
+                                         class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene Baño ? : {{input type="checkbox" checked=cuarto.tiene_bano
+                                      class="form-control col-sm-11 col-md-9"}}</p>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <div class="signUp-input">
+      <p>Número de Baños: </p>
+      {{input type="text" value=nbanos focus-out="updateBanos" key-press="updateBanos"
+              class="form-control col-sm-11 col-md-9"}}
+    </div>
+
+    {{#if nbanosarray}}
+      <div class="login-marco">
+        <h3>Baños: </h3>
+        {{#each nbanosarray as |bano|}}
+          <div class="signUp-input">
+            <h4>Baño {{bano.numero}}</h4>
+            <hr>
+            <p>Área : </p>
+            {{input type="text" value=bano.area class="form-control col-sm-11 col-md-9"}}
+            <p>Tiene Ducha ? : {{input type="checkbox" checked=bano.tiene_armario
+                                       class="form-control col-sm-11 col-md-9"}}</p>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <div class="signUp-input">
+      <p>Tipo: </p>
+      {{#power-select selected=selTipo options=tipos  onchange=(action "selectTipo") as |name|}}
+        {{name}}
+      {{/power-select}}
+    </div>
+
+    {{#if isCasa}}
+      <div class="signUp-input">
+        <p>Tiene Terraza ? : {{input type="checkbox" checked=tiene_terraza
+                                     class="form-control col-sm-11 col-md-9"}}</p>
+        <p>Tiene Garaje ? : {{input type="checkbox" checked=tiene_garaje
+                                    class="form-control col-sm-11 col-md-9"}}</p>
+      </div>
+
+    {{/if}}
+
+    {{#unless isCasa}}
+      <div class="login-marco">
+        <h3>Unidad: </h3>
+        <div class="signUp-input">
+          <p>Nombre: </p>
+          {{input type="text" value=unidad_nombre class="form-control col-sm-11 col-md-9"}}
+          <p>Es Cerrada ? : {{input type="checkbox" checked=unidad_cerrada
+                                    class="form-control col-sm-11 col-md-9"}}</p>
+          {{#if unidad_cerrada}}
+            <p>Tiene servicio de aseo? : {{input type="checkbox" checked=unidad_tiene_aseo
+                                                 class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene vigilancia? : {{input type="checkbox" checked=unidad_tiene_vigilancia
+                                           class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene piscina? : {{input type="checkbox" checked=unidad_tiene_piscina
+                                        class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene gimnasio? : {{input type="checkbox" checked=unidad_tiene_gimnasio
+                                         class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene salón Social? : {{input type="checkbox" checked=unidad_tiene_salonsocial
+                                             class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tiene parque recreacional? : {{input type="checkbox" checked=unidad_tiene_parquerecreacional
+                                                    class="form-control col-sm-11 col-md-9"}}</p>
+            <p>Tienes zonas verdes? : {{input type="checkbox" checked=unidad_tiene_zonasverdes
+                                              class="form-control col-sm-11 col-md-9"}}</p>
+          {{/if}}
+        </div>
+        <br>
+        <div class="login-marco">
+          <h4>Torre:</h4>
+          <p>Número: </p>
+          {{input type="text" value=torre_numero class="form-control col-sm-11 col-md-9"}}
+          <p>Número de pisos: </p>
+          {{input type="text" value=torre_pisos class="form-control col-sm-11 col-md-9"}}
+          <p>En que piso está el apartamento?: </p>
+          {{input type="text" value=apartamento_piso class="form-control col-sm-11 col-md-9"}}
+          <p>Tiene ascensor? : {{input type="checkbox" checked=torre_tiene_ascensor
+                                       class="form-control col-sm-11 col-md-9"}}</p>
+        </div>
+      </div>
+    {{/unless}}
+
+    <div class="text-center">
+      <button {{action 'registrarInmueble' on="mouseUp"}} class="btn btn-primary">
+        Registrar
+      </button>
+      <button {{action 'cancelar' on="mouseUp"}} class="btn btn-primary">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+{{outlet}}

@@ -19,6 +19,7 @@ Router.map(function () {
   this.route('consultar-pago-funcionarios');
   this.route('ver-inmuebles');
   this.route('ver-contratos', {path: '/ver-contratos/:id'});
+  this.route('registrar-inmueble');
 });
 
 export default Router;
