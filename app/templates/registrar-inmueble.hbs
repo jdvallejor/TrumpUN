@@ -2,10 +2,6 @@
   <div class="col-md-6 login-marco">
     <p class="h3 font-weight-bold">Registrar Inmueble</p>
 
-    {{#each flashMessages.queue as |flash|}}
-      {{flash-message flash=flash}}
-    {{/each}}
-
     <div class="signUp-input">
       <p>Dirección: </p>
       {{input type="text" value=direccion class="form-control col-sm-11 col-md-9"}}
@@ -38,7 +34,7 @@
     </div>
 
     {{#if ncuartosarray}}
-      <div class="login-marco">
+      <div class="login-marco2">
         <h3>Cuartos: </h3>
         {{#each ncuartosarray as |cuarto|}}
           <div class="signUp-input">
@@ -62,7 +58,7 @@
     </div>
 
     {{#if nbanosarray}}
-      <div class="login-marco">
+      <div class="login-marco2">
         <h3>Baños: </h3>
         {{#each nbanosarray as |bano|}}
           <div class="signUp-input">
@@ -95,7 +91,7 @@
     {{/if}}
 
     {{#unless isCasa}}
-      <div class="login-marco">
+      <div class="login-marco3">
         <h3>Unidad: </h3>
         <div class="signUp-input">
           <p>Nombre: </p>
@@ -120,7 +116,7 @@
           {{/if}}
         </div>
         <br>
-        <div class="login-marco">
+        <div class="login-marco2">
           <h4>Torre:</h4>
           <p>Número: </p>
           {{input type="text" value=torre_numero class="form-control col-sm-11 col-md-9"}}
@@ -134,7 +130,7 @@
       </div>
     {{/unless}}
 
-    <div class="text-center">
+    <div class="pt-3 text-center">
       <button {{action 'registrarInmueble' on="mouseUp"}} class="btn btn-primary">
         Registrar
       </button>
@@ -142,6 +138,10 @@
         Cancelar
       </button>
     </div>
+    <br>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
   </div>
 </div>
 

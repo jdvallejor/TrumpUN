@@ -11,6 +11,8 @@
 $main-font: Aller, sans-serif;
 $main-color: #309df9;
 $main-dark-shadow: #2c72da;
+$main-dark-shadow2: #9139b7;
+$main-dark-shadow3: #da4249;
 $main-dark-border: darkcyan;
 
 /* //////////////////////////////////////////////////////////////////////*/
@@ -234,6 +236,20 @@ footer > .row > div:not(:last-child):after {
   margin: 0 auto;
 }
 
+.login-marco2 {
+  border: solid 2px $main-dark-shadow2;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.login-marco3 {
+  border: solid 2px $main-dark-shadow3;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
 .login p {
   text-align: center;
   font-size: 20px;
@@ -321,8 +337,6 @@ footer > .row > div:not(:last-child):after {
 
 /* //////////////////////////////////////////////////////////////////////*/
 
-
-
 /* //////////////////////////////////////////////////////////////////////*/
 /* CSS DEL CU4 */
 /* //////////////////////////////////////////////////////////////////////*/
@@ -352,10 +366,13 @@ footer > .row > div:not(:last-child):after {
   height: 100%;
 }
 
-#InmOfrece {background-color: white;}
-#InmArrienda {background-color: white;}
+#InmOfrece {
+  background-color: white;
+}
 
-
+#InmArrienda {
+  background-color: white;
+}
 
 .tablinkContratos {
   background-color: #555;
@@ -368,9 +385,11 @@ footer > .row > div:not(:last-child):after {
   font-size: 17px;
   width: 25%;
 }
+
 .tablinkContratos:hover {
   background-color: #777;
 }
+
 /* Style the tab content (and add height:100% for full page content) */
 .tableContratos {
   color: black;
@@ -380,7 +399,6 @@ footer > .row > div:not(:last-child):after {
 }
 
 /* //////////////////////////////////////////////////////////////////////*/
-
 
 @import "ember-power-select";
 
