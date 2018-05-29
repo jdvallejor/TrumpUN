@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import {computed} from '@ember/object';
 import {inject} from '@ember/service';
 import {get} from '@ember/object';
+import DS from "ember-data";
 
 export default Controller.extend({
   flashMessages: inject(),
@@ -120,13 +121,16 @@ export default Controller.extend({
             validvar.push('nbanosarray');
           }
         }
+        let torre_pisos = 0;
+        let apartamento_piso = 0;
+
         // Si se seleccionó apartamento verifica que se hayan ingresado datos válidos en Unidad y Torre
         if (!this.get('isCasa')) {
-          const torre_pisos = (!isNaN(this.get('torre_pisos')) ? parseInt(this.get('torre_pisos')) : 0);
+          torre_pisos = (!isNaN(this.get('torre_pisos')) ? parseInt(this.get('torre_pisos')) : 0);
           if (torre_pisos <= 0) {
             validvar.push('torre_pisos');
           }
-          const apartamento_piso = (!isNaN(this.get('apartamento_piso')) ? parseInt(this.get('apartamento_piso')) : 0);
+          apartamento_piso = (!isNaN(this.get('apartamento_piso')) ? parseInt(this.get('apartamento_piso')) : 0);
           if (apartamento_piso <= 0) {
             validvar.push('apartamento_piso');
           }
@@ -159,7 +163,7 @@ export default Controller.extend({
             consistentvar.push('suma_areas');
           }
           // Cuartos o Baños sin ingresar/escondidos
-          if (ncuartos !== ncuartosarray.length || nbanos !== nbanosarray.length) {
+          if (ncuartos !== this.get('ncuartosarray').length || nbanos !== this.get('nbanosarray').length) {
             consistentvar.push('room_missing');
           }
           // Si se seleccionó apartamento verifica la consistencia en los datos de la Torre
@@ -169,7 +173,7 @@ export default Controller.extend({
             }
           }
 
-          if (validvar.length > 0) {
+          if (consistentvar.length > 0) {
             // Desplegar mensaje de error si hay datos inconsistentes
             get(this, 'flashMessages').clearMessages();
             get(this, 'flashMessages').danger('Hay un error en la consistencia de los datos', {
@@ -181,7 +185,37 @@ export default Controller.extend({
             alert('Hay un error en la consistencia de los datos');
           } else {
             // Guardar el Inmueble
-            
+
+            let inmueble = null;
+
+            if (this.get('isCasa')) {
+              inmueble = this.get('store').createRecord('casa', {
+                tiene_terraza: this.get('tiene_terraza'),
+                tiene_garaje: this.get('tiene_terraza')
+              });
+            } else {
+              inmueble = this.get('store').createRecord('apartamento', {
+                nro_piso: this.get('apartamento_piso')
+              });
+            }
+
+            inmueble.set('direccion', this.get('direccion'));
+            inmueble.set('estrato', estrato);
+            inmueble.set('area_total', area_total);
+            inmueble.set('nro_pisos', npisos);
+            inmueble.set('nro_balcones', nbalcones);
+            inmueble.set('nro_banos', nbanos);
+            inmueble.set('estado', 'Libre');
+
+
+            get(this, 'flashMessages').clearMessages();
+            get(this, 'flashMessages').success('Inmueble creado correctamente!', {
+              //timeout: 3000,
+              priority: 100,
+              sticky: true,
+              showProgress: true
+            });
+            alert('Inmueble creado correctamente!');
           }
         }
       }
