@@ -11,10 +11,10 @@ export default DS.Model.extend({
   estado: DS.attr('string'),
   tipo: DS.attr('string'),
 
-  cuarto: DS.hasMany('cuarto'),
-  bano: DS.hasMany('bano'),
+  cuartos: DS.hasMany('cuarto', {inverse: 'inmueble'}),
+  banos: DS.hasMany('bano', {inverse: 'inmueble'}),
 
-  arrendatario: DS.belongsTo('cliente', {inverse: 'inmueblesArrienda', key: 'documento'}),
-  arrendador: DS.belongsTo('cliente', {inverse: 'inmueblesOfrece', key: 'documento'}),
+  arrendatario: DS.belongsTo('cliente', {inverse: 'inmueblesArrienda', polymorphic: true}),
+  arrendador: DS.belongsTo('cliente', {inverse: 'inmueblesOfrece', polymorphic: true}),
   contratos: DS.hasMany('contrato'),
 });

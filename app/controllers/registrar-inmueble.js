@@ -2,10 +2,10 @@ import Controller from '@ember/controller';
 import {computed} from '@ember/object';
 import {inject} from '@ember/service';
 import {get} from '@ember/object';
-import DS from "ember-data";
 
 export default Controller.extend({
   flashMessages: inject(),
+  firebaseApp: inject(),
   tipos: ['Casa', 'Apartamento'],
   selTipo: 'Casa',
   isCasa: computed('selTipo', function () {
@@ -166,6 +166,14 @@ export default Controller.extend({
           if (ncuartos !== this.get('ncuartosarray').length || nbanos !== this.get('nbanosarray').length) {
             consistentvar.push('room_missing');
           }
+          // Baños en cuartos por debajo de el número general de baños
+          let suma_banos = 0;
+          this.get('ncuartosarray').map(el => {
+            suma_banos = suma_banos + ((el['tiene_bano']) ? 1 : 0);
+          });
+          if (suma_banos > nbanos) {
+            consistentvar.push('nbanos');
+          }
           // Si se seleccionó apartamento verifica la consistencia en los datos de la Torre
           if (!this.get('isCasa')) {
             if ((apartamento_piso + npisos - 1) > torre_pisos) {
@@ -191,13 +199,21 @@ export default Controller.extend({
             if (this.get('isCasa')) {
               inmueble = this.get('store').createRecord('casa', {
                 tiene_terraza: this.get('tiene_terraza'),
-                tiene_garaje: this.get('tiene_terraza')
+                tiene_garaje: this.get('tiene_garaje'),
+                tipo: 'Casa',
               });
+              inmueble.save();
             } else {
               inmueble = this.get('store').createRecord('apartamento', {
-                nro_piso: this.get('apartamento_piso')
+                nro_piso: this.get('apartamento_piso'),
+                tipo: 'Apartamento',
               });
+              inmueble.save();
             }
+
+            this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set({
+              tipo: inmueble.get('tipo')
+            });
 
             inmueble.set('direccion', this.get('direccion'));
             inmueble.set('estrato', estrato);
@@ -206,7 +222,61 @@ export default Controller.extend({
             inmueble.set('nro_balcones', nbalcones);
             inmueble.set('nro_banos', nbanos);
             inmueble.set('estado', 'Libre');
+            inmueble.save();
 
+            for (let i = 0; i <= ncuartos - 1; i++) {
+              let cuarto = this.get('store').createRecord('cuarto', {
+                area: this.get('ncuartosarray')[i]['area'],
+                tiene_armario: this.get('ncuartosarray')[i]['tiene_armario'],
+                tiene_bano: this.get('ncuartosarray')[i]['tiene_bano'],
+              });
+              cuarto.save();
+              inmueble.get('cuartos').pushObject(cuarto);
+            }
+            inmueble.save();
+
+            for (let i = 0; i <= nbanos - 1; i++) {
+              let bano = this.get('store').createRecord('bano', {
+                area: this.get('nbanosarray')[i]['area'],
+                tiene_ducha: this.get('nbanosarray')[i]['tiene_ducha'],
+              });
+              bano.save();
+              inmueble.get('banos').pushObject(bano);
+            }
+            inmueble.save();
+
+            if (!this.get('isCasa')) {
+              let unidad = this.get('store').createRecord('unidad', {
+                nombre: this.get('nombre_unidad'),
+                is_cerrada: this.get('unidad_cerrada'),
+                tiene_aseo: this.get('unidad_tiene_aseo'),
+                tiene_vigilancia: this.get('unidad_tiene_vigilancia'),
+                tiene_piscina: this.get('unidad_tiene_piscina'),
+                tiene_gimnasio: this.get('unidad_tiene_gimnasio'),
+                tiene_salonsocial: this.get('unidad_tiene_salonsocial'),
+                tiene_parquerecreacional: this.get('unidad_tiene_parquerecreacional'),
+                tiene_zonasverdes: this.get('unidad_tiene_zonasverdes'),
+              });
+              unidad.save();
+
+              let torre = this.get('store').createRecord('torre', {
+                numero: this.get('torre_numero'),
+                tiene_ascensor: this.get('torre_tiene_ascensor'),
+                nro_pisos: this.get('torre_pisos'),
+                unidad: unidad
+              });
+              torre.save();
+
+              inmueble.set('torre', torre);
+              inmueble.save();
+            }
+
+            this.get('store').findRecord('cliente', '-' + this.get('session').content.uid).then((user) => {
+              inmueble.set('arrendador', user);
+              inmueble.save();
+              user.get('inmueblesOfrece').pushObject(inmueble);
+              user.save();
+            });
 
             get(this, 'flashMessages').clearMessages();
             get(this, 'flashMessages').success('Inmueble creado correctamente!', {
@@ -215,6 +285,24 @@ export default Controller.extend({
               sticky: true,
               showProgress: true
             });
+
+            ['direccion', 'estrato', 'area', 'npisos', 'nbalcones', 'ncuartos', 'nbanos',
+              'tiene_terraza', 'tiene_garaje',
+              'unidad_nombre', 'unidad_cerrada', 'unidad_tiene_aseo',
+              'unidad_tiene_vigilancia',
+              'unidad_tiene_piscina',
+              'unidad_tiene_gimnasio',
+              'unidad_tiene_salonsocial',
+              'unidad_tiene_parquerecreacional',
+              'unidad_tiene_zonasverdes',
+              'torre_numero',
+              'torre_pisos',
+              'apartamento_piso',
+              'torre_tiene_ascensor'].map(el => {
+              this.set(el, '');
+            });
+            this.send('updateCuartos');
+            this.send('updateBanos');
             alert('Inmueble creado correctamente!');
           }
         }
