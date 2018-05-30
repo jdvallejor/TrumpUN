@@ -1,42 +1,46 @@
 {{#if session.isAuthenticated}}
+  {{#link-to "menu-jefe" tagName= "button" class="btn btn-primary main-btn-size"}}
+    Regresar
+  {{/link-to}}
   <div class="main-container pb-5 mb-5">
-
-    {{#each model as |funcionario|}}
-      <br>
-      <div class="col-md-6 login-marco p-2">
-        <div class="p-2">
-          <span class="h5 font-weight-bold">Funcionario: </span><span class="h5">{{funcionario.nombre}}</span>
-        </div>
-        <div class="p-2">
-          <span class="h5 font-weight-bold">Salario: </span><span class="h5">{{funcionario.salario}}</span>
-        </div>
-        <div class="p-2">
-          <span class="h5 font-weight-bold">Contratos: </span>
-        </div>
-        {{#if funcionario.hayContratos}}
-          {{#each funcionario.contratos as |contrato|}}
-            <div class="login-marco col-md-9 m-2">
-              <span class="font-weight-bold">Arrendador : </span><span>{{contrato.arrendador.nombre}}</span>
-              <br>
-              <span class="font-weight-bold">Arrendatario : </span><span>{{contrato.arrendatario.nombre}}</span>
-              <br>
-              <span class="font-weight-bold">Inmueble : </span><span>{{contrato.inmueble.identificador}}</span>
-              <br>
-              <span class="font-weight-bold">Fecha : </span><span>{{contrato.fecha}}</span>
-              <br>
-              <span class="font-weight-bold">Valor : </span><span>{{contrato.valor}}</span>
-            </div>
-          {{/each}}
-        {{/if}}
-        {{#unless funcionario.hayContratos}}
-          <div class="border border-danger rounded col-md-9 m-2 text-danger">
-            No posee contratos creados en el mes actual
+    {{#if noHayFuncionarios}}
+      <strong>No hay funcionarios</strong>
+    {{else}}
+      {{#each model as |funcionario|}}
+        <br>
+        <div class="col-md-6 login-marco p-2">
+          <div class="p-2">
+            <span class="h5 font-weight-bold">Funcionario: </span><span class="h5">{{funcionario.nombre}}</span>
           </div>
-        {{/unless}}
-      </div>
-    {{/each}}
-
-
+          <div class="p-2">
+            <span class="h5 font-weight-bold">Salario: </span><span class="h5">{{funcionario.salario}}</span>
+          </div>
+          <div class="p-2">
+            <span class="h5 font-weight-bold">Contratos: </span>
+          </div>
+          {{#if funcionario.hayContratos}}
+            {{#each funcionario.contratos as |contrato|}}
+              <div class="login-marco col-md-9 m-2">
+                <span class="font-weight-bold">Arrendador : </span><span>{{contrato.arrendador.nombre}}</span>
+                <br>
+                <span class="font-weight-bold">Arrendatario : </span><span>{{contrato.arrendatario.nombre}}</span>
+                <br>
+                <span class="font-weight-bold">Inmueble : </span><span>{{contrato.inmueble.identificador}}</span>
+                <br>
+                <span class="font-weight-bold">Fecha : </span><span>{{contrato.fecha}}</span>
+                <br>
+                <span class="font-weight-bold">Valor : </span><span>{{contrato.valor}}</span>
+              </div>
+            {{/each}}
+          {{/if}}
+          {{#unless funcionario.hayContratos}}
+            <div class="border border-danger rounded col-md-9 m-2 text-danger">
+              No posee contratos creados en el mes actual
+            </div>
+          {{/unless}}
+        </div>
+      {{/each}}
+    {{/if}}
   </div>
 {{/if}}
 {{outlet}}

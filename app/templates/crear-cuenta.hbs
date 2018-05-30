@@ -28,4 +28,16 @@
     </div>
   </div>
 </div>
+{{#bs-modal-simple open=ok title="Success" size="sm" onHidden=(action (mut ok) false)}}
+  Cliente creado exitosamente
+{{/bs-modal-simple}}
+{{#bs-modal-simple open=correoInvalido title="Success" size="sm" onHidden=(action (mut correoInvalido) false)}}
+  Correo erróneo
+{{/bs-modal-simple}}
+{{#bs-modal-simple open=faltanDatos title="Success" size="sm" onHidden=(action (mut faltanDatos) false)}}
+  Faltan datos por ingresar
+{{/bs-modal-simple}}
+{{#bs-modal-simple open=usuarioExiste title="Success" size="sm" onHidden=(action (mut usuarioExiste) false)}}
+  El usuario ya existe
+{{/bs-modal-simple}}
 {{outlet}}
