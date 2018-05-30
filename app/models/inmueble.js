@@ -10,6 +10,8 @@ export default DS.Model.extend({
   nro_banos: DS.attr('number'),
   estado: DS.attr('string'),
   tipo: DS.attr('string'),
+  casa: DS.belongsTo('casa', {inverse: 'inmueble', polymorphic: true}),
+  apartamento: DS.belongsTo('apartamento', {inverse: 'inmueble', polymorphic: true}),
 
   cuartos: DS.hasMany('cuarto', {inverse: 'inmueble'}),
   banos: DS.hasMany('bano', {inverse: 'inmueble'}),

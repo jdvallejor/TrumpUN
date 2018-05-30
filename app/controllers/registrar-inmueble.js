@@ -195,34 +195,36 @@ export default Controller.extend({
             // Guardar el Inmueble
 
             let inmueble = null;
+            let inmueblemain = null;
+
+            inmueblemain = this.get('store').createRecord('inmueble', {});
+
+            inmueblemain.set('direccion', this.get('direccion'));
+            inmueblemain.set('estrato', estrato);
+            inmueblemain.set('area_total', area_total);
+            inmueblemain.set('nro_pisos', npisos);
+            inmueblemain.set('nro_balcones', nbalcones);
+            inmueblemain.set('nro_banos', nbanos);
+            inmueblemain.set('estado', 'Libre');
+            inmueblemain.save();
 
             if (this.get('isCasa')) {
               inmueble = this.get('store').createRecord('casa', {
                 tiene_terraza: this.get('tiene_terraza'),
                 tiene_garaje: this.get('tiene_garaje'),
-                tipo: 'Casa',
               });
               inmueble.save();
+              inmueblemain.set('tipo', 'Casa');
+              inmueblemain.save();
             } else {
               inmueble = this.get('store').createRecord('apartamento', {
                 nro_piso: this.get('apartamento_piso'),
-                tipo: 'Apartamento',
               });
               inmueble.save();
+              inmueblemain.set('tipo', 'Apartamento');
+              inmueblemain.save();
             }
-
-            /*this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set({
-              tipo: inmueble.get('tipo')
-            });*/
-
-            inmueble.set('direccion', this.get('direccion'));
-            inmueble.set('estrato', estrato);
-            inmueble.set('area_total', area_total);
-            inmueble.set('nro_pisos', npisos);
-            inmueble.set('nro_balcones', nbalcones);
-            inmueble.set('nro_banos', nbanos);
-            inmueble.set('estado', 'Libre');
-            inmueble.save();
+            inmueble.set('inmueble', inmueblemain);
 
             for (let i = 0; i <= ncuartos - 1; i++) {
               let cuarto = this.get('store').createRecord('cuarto', {
@@ -231,9 +233,9 @@ export default Controller.extend({
                 tiene_bano: this.get('ncuartosarray')[i]['tiene_bano'],
               });
               cuarto.save();
-              inmueble.get('cuartos').pushObject(cuarto);
+              inmueblemain.get('cuartos').pushObject(cuarto);
             }
-            inmueble.save();
+            inmueblemain.save();
 
             for (let i = 0; i <= nbanos - 1; i++) {
               let bano = this.get('store').createRecord('bano', {
@@ -241,9 +243,9 @@ export default Controller.extend({
                 tiene_ducha: this.get('nbanosarray')[i]['tiene_ducha'],
               });
               bano.save();
-              inmueble.get('banos').pushObject(bano);
+              inmueblemain.get('banos').pushObject(bano);
             }
-            inmueble.save();
+            inmueblemain.save();
 
             if (!this.get('isCasa')) {
               let unidad = this.get('store').createRecord('unidad', {
@@ -272,15 +274,11 @@ export default Controller.extend({
             }
 
             this.get('store').findRecord('cliente', '-' + this.get('session').content.uid).then((user) => {
-              inmueble.set('arrendador', user);
-              inmueble.save();
-              user.get('inmueblesOfrece').pushObject(inmueble);
+              inmueblemain.set('arrendador', user);
+              inmueblemain.save();
+              user.get('inmueblesOfrece').pushObject(inmueblemain);
               user.save();
             });
-
-            this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set(
-              inmueble.toJSON()
-            );
 
             get(this, 'flashMessages').clearMessages();
             get(this, 'flashMessages').success('Inmueble creado correctamente!', {
