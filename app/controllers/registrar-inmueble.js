@@ -45,24 +45,24 @@ export default Controller.extend({
       // En caso de haber ingresado cuartos verifica que se hayan llenado los campos correspondientes
       if (this.get('ncuartosarray') !== null) {
         if (this.get('ncuartosarray').filter(el => {
-          return (el['area'] === undefined || el['area'] === '')
-        }).length > 0) {
+            return (el['area'] === undefined || el['area'] === '')
+          }).length > 0) {
           checkvar.push('ncuartosarray');
         }
       }
       // En caso de haber ingresado baños verifica que se hayan llenado los campos correspondientes
       if (this.get('nbanosarray') !== null) {
         if (this.get('nbanosarray').filter(el => {
-          return (el['area'] === undefined || el['area'] === '')
-        }).length > 0) {
+            return (el['area'] === undefined || el['area'] === '')
+          }).length > 0) {
           checkvar.push('nbanosarray');
         }
       }
       // Si se seleccionó apartamento verifica que se hayan ingresado datos de la Unidad y la Torre
       if (!this.get('isCasa')) {
         if (['unidad_nombre', 'torre_numero', 'torre_pisos', 'apartamento_piso'].filter(function (el) {
-          return (that.get(el) === undefined || that.get(el) === '')
-        }).length > 0) {
+            return (that.get(el) === undefined || that.get(el) === '')
+          }).length > 0) {
           checkvar.push('unidadytorre');
         }
       }
@@ -108,16 +108,16 @@ export default Controller.extend({
         // En caso de haber ingresado cuartos verifica que el área ingresada sea válida
         if (this.get('ncuartosarray') !== null) {
           if (this.get('ncuartosarray').filter(el => {
-            return (!isNaN(el['area']) ? parseFloat(el['area']) <= 0 : true);
-          }).length > 0) {
+              return (!isNaN(el['area']) ? parseFloat(el['area']) <= 0 : true);
+            }).length > 0) {
             validvar.push('ncuartosarray');
           }
         }
         // En caso de haber ingresado baños verifica que el área ingresada sea válida
         if (this.get('nbanosarray') !== null) {
           if (this.get('nbanosarray').filter(el => {
-            return (!isNaN(el['area']) ? parseFloat(el['area']) <= 0 : true);
-          }).length > 0) {
+              return (!isNaN(el['area']) ? parseFloat(el['area']) <= 0 : true);
+            }).length > 0) {
             validvar.push('nbanosarray');
           }
         }
@@ -211,9 +211,9 @@ export default Controller.extend({
               inmueble.save();
             }
 
-            this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set({
+            /*this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set({
               tipo: inmueble.get('tipo')
-            });
+            });*/
 
             inmueble.set('direccion', this.get('direccion'));
             inmueble.set('estrato', estrato);
@@ -277,6 +277,10 @@ export default Controller.extend({
               user.get('inmueblesOfrece').pushObject(inmueble);
               user.save();
             });
+
+            this.get('firebaseApp').database().ref('inmuebles').child(inmueble._internalModel.id).set(
+              inmueble.toJSON()
+            );
 
             get(this, 'flashMessages').clearMessages();
             get(this, 'flashMessages').success('Inmueble creado correctamente!', {
